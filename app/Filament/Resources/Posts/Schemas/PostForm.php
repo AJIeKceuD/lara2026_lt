@@ -61,8 +61,8 @@ class PostForm
                 FileUpload::make('preview_image')
                     ->image()
                     ->imageEditor()
-                    ->imageEditorViewportWidth('1920')  // Replaces imageResizeTargetWidth
-                    ->imageEditorViewportHeight('1080') // Replaces imageResizeTargetHeight
+                    ->imageEditorViewportWidth('800')  // Replaces imageResizeTargetWidth
+                    ->imageEditorViewportHeight('800') // Replaces imageResizeTargetHeight
                     ->directory('posts')
                     ->disk('public')
                     ->visibility('public')

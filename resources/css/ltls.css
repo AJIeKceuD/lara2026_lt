@@ -1,0 +1,98 @@
+@reference "tailwindcss";
+
+body {
+    background-color: #141415;
+    color: #c3c3c3;
+}
+
+/* button {
+    background-color: #f4f4f1;
+} */
+
+h1, h2 {
+    @apply text-[100px] font-bold mb-2 leading-none;
+    color: #c6c6c6;
+}
+h3 {
+    @apply text-[32px] font-normal mb-2 leading-none;
+    color: #c6c6c6;
+}
+
+.section-head {
+    @apply flex justify-center;
+    margin-top:180px;
+    margin-bottom: 40px;
+    font-size: 12px;
+}
+.content-big {
+    @apply text-center;
+    font-weight: normal;
+    font-size: 50px;
+}
+.section-tags {
+    font-size: 14px;
+}
+
+.btn-arrow {
+    font-size: 18px;
+}
+.btn-arrow::after {
+    content: "→";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    width: 50px;           /* Ширина круга */
+    height: 50px;          /* Высота круга */
+    margin-left: 22px;
+    background-color: #c6c6c6;
+    color: black;
+    border-radius: 9999px;
+    font-size: 28px;       /* Размер стрелки */
+    font-weight: bold;     /* Жирность */
+    padding-bottom: 10px;
+    transition: all 0.3s;
+}
+.btn-arrow:hover::after {
+    transform: translateX(4px);
+}
+
+.black_btn {
+    @apply inline-block px-5 py-2 text-white border-1 border-white rounded-xl transition-colors duration-200 shadow-md;
+    color: #c6c6c6;
+    border-color: #c6c6c6;
+}
+.black_btn:hover {
+    transform: scale(1.05);
+}
+
+.white_btn {
+    @apply inline-block px-5 py-4 m-1 text-black border-1 border-white bg-white rounded-xl transition-colors duration-200 shadow-md;
+}
+.white_btn:hover {
+    transform: scale(1.05);
+}
+
+.white-circle-updown {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    width: 50px;           /* Ширина круга */
+    height: 50px;          /* Высота круга */
+    background-color: #c6c6c6;
+    color: black;
+    border-radius: 9999px;
+    font-size: 28px;       /* Размер стрелки */
+    font-weight: bold;     /* Жирность */
+    padding-bottom: 8px;
+    padding-left: 2px;
+    transition: all 0.3s;
+}
+
+.arrow-in-line {
+    line-height: 12px;
+    font-size: 32px;
+}
+
