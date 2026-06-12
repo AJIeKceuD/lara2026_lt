@@ -5,10 +5,79 @@
 @section('content')
 <div class="container mx-auto px-4 py-8">
     <section class="grid grid-cols-2 gap-4">
-        <div class="mr-auto justify-start">
+        @if($topImages->count() > 0)
             <div 
                 x-data="{
-                    images: ['/images/vi_front.jpg', '/images/vi_front2.jpg', '/images/vi_front.jpg'],
+                    currentIndex: 0,
+                    total: Number({{ $topImages->count() }}),
+                    interval: null,
+                    autoplayDelay: 3000,
+                    init() {
+                        console.log('total:', this.total, 'type:', typeof this.total);
+                        if (this.total > 1) this.startAutoplay()
+                    },
+                    startAutoplay() {
+                        this.interval = setInterval(() => this.next(), this.autoplayDelay)
+                    },
+                    stopAutoplay() { 
+                        if (this.interval) clearInterval(this.interval) 
+                    },
+                    next() { 
+                        this.currentIndex = (this.currentIndex + 1) % this.total 
+                    },
+                    previous() { 
+                        this.currentIndex = (this.currentIndex - 1 + this.total) % this.total 
+                    },
+                    goTo(index) { 
+                        this.currentIndex = index 
+                    }
+                }"
+                @mouseenter="total > 1 && stopAutoplay()"
+                @mouseleave="total > 1 && startAutoplay()"
+                class="relative w-[400px] h-[400px] mx-auto"
+            >
+                <div class="relative w-full h-full overflow-hidden rounded-lg">
+                    @foreach($topImages as $index => $image)
+                        <div 
+                            x-show="currentIndex === {{ $index }}"
+                            class="w-full h-full"
+                        >
+                            <img 
+                                src="{{ Storage::url($image->image_path) }}" 
+                                alt="{{ $image->getTranslation('alt_text', $locale, false) ?? '' }}"
+                                class="w-full h-full object-cover"
+                                loading="lazy"
+                            >
+                        </div>
+                    @endforeach
+                </div>
+
+                @if($topImages->count() > 1)
+                    <!--button @click="previous()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg z-10">◀</button>
+                    <button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg z-10">▶</button-->
+                    
+                    <div class="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-10">
+                        <template x-for="index in total" :key="index">
+                            <button 
+                                @click="goTo(index - 1)"
+                                class="rounded-full transition-all duration-300"
+                                :class="{
+                                    'bg-white w-1.5 h-4': currentIndex === (index - 1),
+                                    'bg-gray-400 w-1.5 h-1.5': currentIndex !== (index - 1)
+                                }"
+                            ></button>
+                        </template>
+                    </div>
+                @endif
+            </div>
+        @endif
+
+        <!--div class="mr-auto justify-start">
+        @if($topImages->count() && false)
+            <div 
+                x-data="{
+                    images: @js($topImages->map(fn($img) => Storage::url($img->image_path))->toArray()),
+                    alts: @js($topImages->map(fn($img) => $img->getTranslation('alt_text', $locale, false) ?? '')->toArray()),
                     currentIndex: 0,
                     interval: null,
                     init() {
@@ -36,7 +105,11 @@
                 @mouseleave="startAutoplay()"
                 class="relative w-[400px] h-[400px] mx-auto"
             >
-                <img :src="images[currentIndex]" class="w-full h-full object-cover rounded-lg">
+                <img 
+                    :src="images[currentIndex]"
+                    :alt="alts[currentIndex]"
+                    class="w-full h-full object-cover rounded-lg"
+                >
                 
                 <div class="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-10">
                     <template x-for="(image, index) in images" :key="index">
@@ -51,7 +124,8 @@
                     </template>
                 </div>
             </div>
-        </div>
+        @endif
+        </div-->
         <div class="">
             <div class="section-tags">{{ __('GAMES') }} • {{ __('APPS') }} • {{ __('MARKETING CONTENT') }} • {{ __('HELP CENTER') }} • {{ __('USER MANUALS') }}</div>
             <div>

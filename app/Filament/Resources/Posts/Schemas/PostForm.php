@@ -26,12 +26,12 @@ class PostForm
                 ->schema([
                     TextInput::make("title.{$locale}")
                         ->label("Title ({$label})")
-                        ->required()
+                        // ->required()
                         ->maxLength(255),
                     
                     RichEditor::make("content.{$locale}")
                         ->label("Content ({$label})")
-                        ->required()
+                        // ->required()
                         ->fileAttachmentsDirectory('attachments'),
                     
                     // Для slug — проверка уникальности в рамках конкретного языка
@@ -73,7 +73,8 @@ class PostForm
                     // ->imageResizeTargetHeight(450),
                 DateTimePicker::make('published_at')
                     ->default(now())
-                    ->displayFormat('Y-m-d H:i'),
+                    ->native(false)
+                    ->displayFormat('Y-m-d H:i:s'),
                 TextInput::make('reading_time')
                     ->numeric()
                     ->minValue(1)

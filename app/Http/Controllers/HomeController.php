@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\TopImage;
 
 class HomeController extends Controller
 {
@@ -17,7 +18,13 @@ class HomeController extends Controller
             ->orderBy('published_at', 'desc')
             ->limit(3)
             ->get();
+
+        // Получаем верхние картинки
+        $topImages = TopImage::published()
+            ->forLocale($locale)
+            ->get();
+            // dd($topImages);
         
-        return view('home', compact('latestPosts'));
+        return view('home', compact('locale', 'latestPosts', 'topImages'));
     }
 }
