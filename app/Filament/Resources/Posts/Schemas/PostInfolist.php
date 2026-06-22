@@ -38,8 +38,8 @@ class PostInfolist
                 ->columnSpanFull(),
 
                 ImageEntry::make('preview_image')
-                    ->disk('public')
-                    ->visibility('public')
+                    // ->disk('public')
+                    // ->visibility('public')
                     ->placeholder('-'),
                 TextEntry::make('published_at')
                     ->dateTime()

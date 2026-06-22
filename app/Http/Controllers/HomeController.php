@@ -15,6 +15,7 @@ class HomeController extends Controller
         
         // Получаем последние 3 поста для главной
         $latestPosts = Post::published()
+            ->whereTitleExists($locale)
             ->orderBy('published_at', 'desc')
             ->limit(3)
             ->get();

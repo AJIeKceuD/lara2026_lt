@@ -98,8 +98,8 @@ class TopImage extends Model
             }
         });
         static::forceDeleted(function ($topImage) {
-            if ($topImage->image_path && Storage::disk('public')->exists($topImage->image_path)) {
-                Storage::disk('public')->delete($topImage->image_path);
+            if ($topImage->image_path && Storage::disk(config('filesystems.default'))->exists($topImage->image_path)) {
+                Storage::disk(config('filesystems.default'))->delete($topImage->image_path);
             }
         });
     }

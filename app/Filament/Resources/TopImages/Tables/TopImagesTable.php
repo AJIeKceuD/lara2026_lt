@@ -23,7 +23,8 @@ class TopImagesTable
         return $table
             ->columns([
                 ImageColumn::make('image_path')
-                    ->disk('public'),
+                    // ->disk('public')
+                    ,
                 TextColumn::make('original_name')
                     ->searchable(),
                 // TextColumn::make('file_size')

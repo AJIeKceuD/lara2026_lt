@@ -27,7 +27,8 @@ class PostForm
                     TextInput::make("title.{$locale}")
                         ->label("Title ({$label})")
                         // ->required()
-                        ->maxLength(255),
+                        ->maxLength(255)
+                        ->helperText('Пустые заголовки не будут выведены в соответствующей локали'),
                     
                     RichEditor::make("content.{$locale}")
                         ->label("Content ({$label})")
@@ -64,8 +65,8 @@ class PostForm
                     ->imageEditorViewportWidth('800')  // Replaces imageResizeTargetWidth
                     ->imageEditorViewportHeight('800') // Replaces imageResizeTargetHeight
                     ->directory('posts')
-                    ->disk('public')
-                    ->visibility('public')
+                    // ->disk('public_html')
+                    // ->visibility('public')
                     // ->imageResizeMode('cover')
                     // ->imageCropAspectRatio('16:9')
                     ->maxSize(2048),

@@ -14,7 +14,8 @@ class TopImageInfolist
         return $schema
             ->components([
                 ImageEntry::make('image_path')
-                    ->disk('public'),
+                    // ->disk('public')
+                    ,
                 TextEntry::make('original_name')
                     ->placeholder('-'),
                 TextEntry::make('file_size')

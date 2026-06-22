@@ -91,6 +91,15 @@ class Post extends Model
         return !is_null($this->published_at) && $this->published_at <= now();
     }
 
+    // Выбираем посты у которых есть не пустой заголовок нужной локали
+    public function scopeWhereTitleExists($query, string $locale)
+    {
+        return $query->whereNotNull("title->{$locale}")
+                    ->where("title->{$locale}", '!=', '')
+                    ->whereRaw("JSON_EXTRACT(title, '$.\"{$locale}\"') IS NOT NULL")
+                    ->whereRaw("JSON_EXTRACT(title, '$.\"{$locale}\"') != ''");
+    }
+
     // Получить URL статьи (для ЧПУ)
     public function getUrlAttribute(): string {
         return route('posts.show', $this->slug);

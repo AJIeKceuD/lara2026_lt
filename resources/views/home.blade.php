@@ -5,6 +5,7 @@
 @section('content')
 <div class="container mx-auto px-4 py-8">
     <section class="grid grid-cols-2 gap-4">
+        <div>
         @if($topImages->count() > 0)
             <div 
                 x-data="{
@@ -71,6 +72,7 @@
                 @endif
             </div>
         @endif
+        </div>
 
         <!--div class="mr-auto justify-start">
         @if($topImages->count() && false)
@@ -232,7 +234,7 @@
             </div>
         </div>
         @empty
-            <p class="text-gray-500">{{ __('Новостей пока нет') }}</p>
+            <div></div>
         @endforelse
     </section>
 </div>

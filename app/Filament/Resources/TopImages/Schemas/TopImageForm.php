@@ -8,6 +8,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Tabs;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class TopImageForm
 {
@@ -46,20 +48,48 @@ class TopImageForm
                     ->imageEditor()
                     ->required()
                     ->directory('top-images')
-                    ->disk('public')
-                    ->visibility('public')
+                    // ->disk('public_html')
+                    // ->visibility('public')
                     ->helperText('Recomended size: 1200x675px (16:9)')
-                    ->afterStateUpdated(function ($state, $set, $record) {
-                        if ($state) {
-                            // Получаем загруженный файл
-                            $file = \Illuminate\Support\Facades\Request::file('image_path');
+                    // ->afterStateUpdated(function ($state, $set, $record) {
+                    //     if ($state) {
+                    //         // Получаем загруженный файл
+                    //         $file = \Illuminate\Support\Facades\Request::file('image_path');
                             
-                            if ($file) {
-                                $set('original_name', $file->getClientOriginalName());
-                                $set('file_size', $file->getSize());
-                            }
-                        }
-                    }),
+                    //         if ($file) {
+                    //             $set('original_name', $file->getClientOriginalName());
+                    //             $set('file_size', $file->getSize());
+                    //         }
+                    //     }
+                    // })
+                    // ->saveUploadedFileUsing(function ($file, $get, $set) {
+                    //     // Логируем информацию для отладки
+                    //     $originalName = $file->getClientOriginalName();
+                    //     $tempPath = $file->getRealPath();
+                        
+                    //     // Пытаемся сохранить стандартным способом
+                    //     try {
+                    //         $path = Storage::disk('public_html')->put('', $file);
+                            
+                    //         Log::info('File upload debug', [
+                    //             'original_name' => $originalName,
+                    //             'temp_path' => $tempPath,
+                    //             'returned_path' => $path,
+                    //             'full_disk_path' => Storage::disk('public_html')->path(''),
+                    //             'directory_exists' => file_exists(base_path('public_html/storage')),
+                    //             'is_writable' => is_writable(base_path('public_html/storage')),
+                    //         ]);
+                            
+                    //         return $path;
+                    //     } catch (\Exception $e) {
+                    //         Log::error('Upload failed', [
+                    //             'error' => $e->getMessage(),
+                    //             'target_path' => Storage::disk('public_html')->path(''),
+                    //         ]);
+                    //         throw $e;
+                    //     }
+                    // })
+                    ,
                 TextInput::make('original_name')
                     ->disabled()
                     ->dehydrated(false),
