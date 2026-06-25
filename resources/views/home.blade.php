@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
-    <section class="grid grid-cols-2 gap-4">
-        <div>
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 px-4 md:px-0">
+        <div class="order-1 md:order-none"">
         @if($topImages->count() > 0)
             <div 
                 x-data="{
@@ -35,7 +35,7 @@
                 }"
                 @mouseenter="total > 1 && stopAutoplay()"
                 @mouseleave="total > 1 && startAutoplay()"
-                class="relative w-[400px] h-[400px] mx-auto"
+                class="relative w-full max-w-[400px] aspect-square mx-auto"
             >
                 <div class="relative w-full h-full overflow-hidden rounded-lg">
                     @foreach($topImages as $index => $image)
@@ -128,12 +128,12 @@
             </div>
         @endif
         </div-->
-        <div class="">
+        <div class="order-2 md:order-none ">
             <div class="section-tags">{{ __('GAMES') }} • {{ __('APPS') }} • {{ __('MARKETING CONTENT') }} • {{ __('HELP CENTER') }} • {{ __('USER MANUALS') }}</div>
             <div>
                 <h1>{{ __('Localization and LQA Services') }}</h1>
             </div>
-            <div class="mt-30">{{ __('Entrust your content to us — we`ll make it sound natural, relevant, and ready to perform in every market you target.') }}</div>
+            <div class="mt-8 md:mt-30">{{ __('Entrust your content to us — we`ll make it sound natural, relevant, and ready to perform in every market you target.') }}</div>
             <div class="mt-8 mb-4">
                 <a href="{{ route('home', app()->getLocale()) }}" class="white_btn">
                     {{ __('Book a Meeting') }}
@@ -162,19 +162,19 @@
                 showContent: false,
                 isCollapsed: false,
                 toggleContent() {
-                    // Сначала уменьшаем колонку
+                    // First colapse colon
                     this.isCollapsed = true;
                     
-                    // Через 500ms показываем контент
+                    // After 500ms show content
                     setTimeout(() => {
                         this.showContent = true;
                     }, 500);
                 },
                 hideContent() {
-                    // Сначала скрываем контент
+                    // First hide content
                     this.showContent = false;
                     
-                    // Через 300ms расширяем колонку
+                    // After 300ms show colon
                     setTimeout(() => {
                         this.isCollapsed = false;
                     }, 300);
@@ -200,7 +200,6 @@
                 </div>
             </div>
             
-            <!-- Правая часть с контентом -->
             <div class="flex-1 overflow-hidden">
                 <div 
                     x-show="showContent"

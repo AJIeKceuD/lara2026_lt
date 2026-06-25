@@ -5,16 +5,23 @@ body {
     color: #c3c3c3;
 }
 
+.bg-ltls-black {
+    background-color: #141415;
+}
+.bg-ltls-white {
+    background-color: #c6c6c6;
+}
+
 /* button {
     background-color: #f4f4f1;
 } */
 
 h1, h2 {
-    @apply text-[100px] font-bold mb-2 leading-none;
+    @apply text-4xl md:text-[100px] font-bold mb-2 leading-none;
     color: #c6c6c6;
 }
 h3 {
-    @apply text-[32px] font-normal mb-2 leading-none;
+    @apply text-2xl md:text-[32px] font-normal mb-2 leading-none;
     color: #c6c6c6;
 }
 
@@ -25,9 +32,8 @@ h3 {
     font-size: 12px;
 }
 .content-big {
-    @apply text-center;
+    @apply text-center text-[30px] md:text-[50px];
     font-weight: normal;
-    font-size: 50px;
 }
 .section-tags {
     font-size: 14px;
