@@ -35,9 +35,9 @@
                 }"
                 @mouseenter="total > 1 && stopAutoplay()"
                 @mouseleave="total > 1 && startAutoplay()"
-                class="relative w-full max-w-[400px] aspect-square mx-auto"
+                class="relative w-full aspect-square mx-auto"
             >
-                <div class="relative w-full h-full overflow-hidden rounded-lg">
+                <div class="relative w-full h-full rounded-lg">
                     @foreach($topImages as $index => $image)
                         <div 
                             x-show="currentIndex === {{ $index }}"
@@ -46,7 +46,7 @@
                             <img 
                                 src="{{ Storage::url($image->image_path) }}" 
                                 alt="{{ $image->getTranslation('alt_text', $locale, false) ?? '' }}"
-                                class="w-full h-full object-cover"
+                                class="w-full h-full object-contain"
                                 loading="lazy"
                             >
                         </div>
@@ -57,7 +57,7 @@
                     <!--button @click="previous()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg z-10">◀</button>
                     <button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg z-10">▶</button-->
                     
-                    <div class="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-10">
+                    <div class="absolute left-14 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-10">
                         <template x-for="index in total" :key="index">
                             <button 
                                 @click="goTo(index - 1)"
@@ -187,14 +187,14 @@
                 class="transition-all duration-500 overflow-hidden"
             >
                 <div class="py-2">
-                    <div class="flex justify-between items-center">
+                    <div
+                        @click="showContent ? hideContent() : toggleContent()"
+                        class="flex justify-between items-center cursor-pointer"
+                    >
                         <h3 class="">{{ $post->title }}</h3>
                         
-                        <button 
-                            @click="showContent ? hideContent() : toggleContent()" 
-                            class=""
-                        >
-                            <span class="white-circle-updown" x-text="showContent ? '↑' : '↓'">&nbsp;</span>
+                        <button class="">
+                            <span class="white-circle-updown" x-text="showContent ? '→' : '↓'">&nbsp;</span>
                         </button>
                     </div>
                 </div>
