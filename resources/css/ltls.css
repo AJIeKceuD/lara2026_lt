@@ -81,7 +81,7 @@ section[id] {
 }
 
 .black_btn {
-    @apply inline-block px-5 py-2 text-white border-1 border-white rounded-xl transition-colors duration-200 shadow-md;
+    @apply inline-block md:px-5 py-2 text-white border-1 border-white rounded-xl transition-colors duration-200 shadow-md;
     color: #c6c6c6;
     border-color: #c6c6c6;
 }

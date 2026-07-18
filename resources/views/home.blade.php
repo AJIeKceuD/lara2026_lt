@@ -158,12 +158,12 @@
         </div>
     </section>
 
-    <section id="why_us" class="mb-60">
+    <section id="why_us" class="mb-10 md:mb-60">
         <div class="section-head">{{ __('WHY US') }}</div>
         <div class="content-big">{{ __('With over') }}</div>
     </section>
 
-    <section id="news" class="mb-60">
+    <section id="news" class="mb-10 md:mb-60">
         <div class="section-head">{{ __('RELEASE LOG') }}</div>
 
         <h2 class="flex justify-center text-2xl font-bold mb-6">{{ __('NEWS & INSIGHTS') }}</h2>
@@ -253,13 +253,13 @@
         @endforelse
     </section>
 
-    <section id="projects" class="mb-60">
+    <section id="projects" class="mb-10 md:mb-60">
         <div class="section-head">{{ __('PROJECTS') }}</div>
 
         <h2 class="flex justify-center text-2xl font-bold text-center mb-6">{{ __('GAMES WE HELPED') }}<br />{{ __('BRING TO THE WORLD') }}</h2>
     </section>
 
-    <section id="services" class="mb-60">
+    <section id="services" class="mb-10 md:mb-60">
         <div class="section-head">{{ __('SERVICES') }}</div>
 
         <h2 class="flex justify-center text-2xl font-bold text-center mb-6">{{ __('COMPLETE CONTENT &') }}<br />{{ __('LOCALIZATION SOLUTIONS') }}</h2>
@@ -309,7 +309,7 @@
                     x-transition:leave-end="opacity-0 scale-95"
                     class="absolute inset-0 w-full h-full"
                 >
-                    <img src="/images/services/service_1.jpg" alt="Slide 1" class="w-full h-full object-cover" loading="lazy">
+                    <img src="/images/services/service_1.jpg" alt="Slide 1" class="w-full h-full object-cover">
                 </div>
                 <div
                     x-show="activeIndex === 1"
@@ -321,7 +321,7 @@
                     x-transition:leave-end="opacity-0 scale-95"
                     class="absolute inset-0 w-full h-full"
                 >
-                    <img src="/images/services/service_2.jpg" alt="Slide 2" class="w-full h-full object-cover" loading="lazy">
+                    <img src="/images/services/service_2.jpg" alt="Slide 2" class="w-full h-full object-cover">
                 </div>
                 <div
                     x-show="activeIndex === 2"
@@ -333,7 +333,7 @@
                     x-transition:leave-end="opacity-0 scale-95"
                     class="absolute inset-0 w-full h-full"
                 >
-                    <img src="/images/services/service_3.jpg" alt="Slide 3" class="w-full h-full object-cover" loading="lazy">
+                    <img src="/images/services/service_3.jpg" alt="Slide 3" class="w-full h-full object-cover">
                 </div>
                 <div
                     x-show="activeIndex === 3"
@@ -345,7 +345,7 @@
                     x-transition:leave-end="opacity-0 scale-95"
                     class="absolute inset-0 w-full h-full"
                 >
-                    <img src="/images/services/service_4.jpg" alt="Slide 4" class="w-full h-full object-cover" loading="lazy">
+                    <img src="/images/services/service_4.jpg" alt="Slide 4" class="w-full h-full object-cover">
                 </div>
             </div>
 
@@ -511,7 +511,7 @@
         </div>
     </section>
 
-    <section id="call" class="mb-60">
+    <section id="call" class="mb-10 md:mb-60">
         <div class="section-head">{{ __('SCHEDULE A CALL') }}</div>
         <div class="content-big">{{ __('Lets talk') }}</div>
         <div class="flex justify-center items-center mt-12">

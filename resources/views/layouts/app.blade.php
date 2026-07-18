@@ -52,20 +52,20 @@
                         x-transition:leave="transition ease-in duration-150"
                         x-transition:leave-start="opacity-100 translate-y-0"
                         x-transition:leave-end="opacity-0 -translate-y-4"
-                        class="absolute top-full left-0 right-0 md:hidden bg-black shadow-lg rounded-lg p-4 z-50 flex flex-col gap-2"
+                        class="absolute top-full left-0 right-0 md:hidden bg-black rounded-lg p-4 z-50 flex flex-col gap-2"
                         @click.away="mobileMenuOpen = false"
                     >
                         <a href="{{ route('home', app()->getLocale()) }}" class="black_btn w-full text-center" @click="mobileMenuOpen = false">
                             {{ __('Home') }}
                         </a>
-                        <a href="{{ route('home', app()->getLocale()) }}" class="black_btn w-full text-center" @click="mobileMenuOpen = false">
+                        <a href="{{ route('home', app()->getLocale()) }}#projects" class="black_btn w-full text-center" @click="mobileMenuOpen = false">
                             {{ __('Project') }}
                         </a>
-                        <a href="{{ route('home', app()->getLocale()) }}" class="black_btn w-full text-center" @click="mobileMenuOpen = false">
+                        <a href="{{ route('home', app()->getLocale()) }}#services" class="black_btn w-full text-center" @click="mobileMenuOpen = false">
                             {{ __('Services') }}
                         </a>
-                        <a href="{{ route('posts.index', app()->getLocale()) }}" class="black_btn w-full text-center" @click="mobileMenuOpen = false">
-                            {{ __('Posts') }}
+                        <a href="{{ route('home', app()->getLocale()) }}#news" class="black_btn w-full text-center" @click="mobileMenuOpen = false">
+                            {{ __('News') }}
                         </a>
                     </div>
                 </div>
