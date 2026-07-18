@@ -6,6 +6,10 @@
     --font-mono: 'JetBrains Mono', monospace;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: #141415;
     color: #c3c3c3;
@@ -24,17 +28,21 @@ body {
 } */
 
 h1, h2 {
-    @apply text-4xl md:text-[100px] font-bold mb-2 leading-none;
+    @apply text-4xl md:text-[90px] font-bold mb-2 leading-none;
     color: #c6c6c6;
+    font-weight: normal;
 }
 h3 {
     @apply text-2xl md:text-[32px] font-normal mb-2 leading-none;
     color: #c6c6c6;
 }
 
+section[id] {
+    scroll-margin-top: 80px;
+}
+
 .section-head {
     @apply flex justify-center;
-    margin-top:180px;
     margin-bottom: 40px;
     font-size: 12px;
     font-family: var(--font-mono);
@@ -112,3 +120,42 @@ h3 {
     font-size: 32px;
 }
 
+.services-texts-child {
+    @apply border-b overflow-hidden transition-all duration-300 flex flex-col;
+}
+
+.services-texts-child div:last-child {
+    @apply text-gray-400 text-sm md:text-base leading-relaxed;
+}
+
+.services-texts-child button {
+    @apply w-full px-5 py-4 text-left flex items-center justify-between gap-4 transition-colors flex-shrink-0;
+    cursor: pointer;
+}
+
+.services-texts-child button span {
+    @apply text-base md:text-lg transition-colors;
+}
+.services-texts-child button span.flex-1 {
+    font-size: 32px;
+}
+.services-texts-child button span.flex-shrink-0 {
+    font-size: 16px
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+.animate-scroll {
+    animation: scroll 40s linear infinite;
+    display: flex;
+    flex-shrink: 0;
+    will-change: transform;
+}
+.animate-scroll img {
+    @apply min-w-full h-full object-contain;
+}
+#animate-scroll:hover {
+    animation-play-state: paused;
+}
