@@ -134,10 +134,10 @@
                 <h1>{{ __('Localization and LQA Services') }}</h1>
             </div>
             <div class="mt-8 md:mt-30">{{ __('Entrust your content to us — we`ll make it sound natural, relevant, and ready to perform in every market you target.') }}</div>
-            <div class="mt-8 mb-4">
-                <a href="{{ route('home', app()->getLocale()) }}" class="white_btn">
+            <div class="mt-8 mb-4" x-data>
+                <button @click="$store.contactModal.openModal()" class="white_btn">
                     {{ __('Book a Meeting') }}
-                </a>
+                </button>
             </div>
         </div>
     </section>
@@ -269,10 +269,10 @@
             total: 4,
             autoplayInterval: null,
             autoplayDelay: 4000,
-            init() {
+            {{-- init() {
                 if (this.total > 1) this.startAutoplay()
             },
-            {{-- startAutoplay() {
+            startAutoplay() {
                 this.autoplayInterval = setInterval(() => {
                     this.next()
                 }, this.autoplayDelay)
