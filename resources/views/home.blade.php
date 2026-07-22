@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
-    <section id="top" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-32 px-4 md:px-0">
-        <div class="order-1 md:order-none"">
+    <section id="top" class="grid grid-cols-1 md:grid-cols-2 px-4 md:px-0">
+        <div class="order-1 md:order-none px-[3%]">
         @if($topImages->count() > 0)
             <div
                 x-data="{
@@ -57,7 +57,7 @@
                     <!--button @click="previous()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg z-10">◀</button>
                     <button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg z-10">▶</button-->
 
-                    <div class="absolute left-14 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-10">
+                    <div class="absolute left-7 md:left-14 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-10">
                         <template x-for="index in total" :key="index">
                             <button
                                 @click="goTo(index - 1)"
@@ -142,18 +142,27 @@
         </div>
     </section>
 
-    <section id="partners" class="mb-1">
-        <div class="relative w-full overflow-hidden aspect-[16/6] md:aspect-[16/4]">
-            <div class="flex animate-scroll h-full">
-                <img src="/images/partners.png" alt="Slide 1" style="object-position: 0 0;">
-                <img src="/images/partners.png" alt="Slide 2" style="object-position: 25% 0;">
-                <img src="/images/partners.png" alt="Slide 3" style="object-position: 50% 0;">
-                <img src="/images/partners.png" alt="Slide 4" style="object-position: 75% 0;">
-                {{-- Дублируем для бесконечности --}}
-                <img src="/images/partners.png" alt="Slide 1" style="object-position: 0 0;">
-                <img src="/images/partners.png" alt="Slide 2" style="object-position: 25% 0;">
-                <img src="/images/partners.png" alt="Slide 3" style="object-position: 50% 0;">
-                <img src="/images/partners.png" alt="Slide 4" style="object-position: 75% 0;">
+    <section id="partners" class="mb-10 md:mb-60">
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                {{-- @for ($copy = 0; $copy < 2; $copy++)
+                    @foreach (range(1, 5) as $index)
+                        <div
+                            class="slide"
+                            style="background-position: {{ ($index - 1) * -20 }}% 0;"
+                        ></div>
+                    @endforeach
+                @endfor --}}
+                <div class="slide" style="background-position-x: 0%;"></div>
+                <div class="slide" style="background-position-x: 25%;"></div>
+                <div class="slide" style="background-position-x: 50%;"></div>
+                <div class="slide" style="background-position-x: 75%;"></div>
+                <div class="slide" style="background-position-x: 100%;"></div>
+                <div class="slide" style="background-position-x: 0%;"></div>
+                <div class="slide" style="background-position-x: 25%;"></div>
+                <div class="slide" style="background-position-x: 50%;"></div>
+                <div class="slide" style="background-position-x: 75%;"></div>
+                <div class="slide" style="background-position-x: 100%;"></div>
             </div>
         </div>
     </section>
@@ -291,8 +300,8 @@
             },
             goTo(index) {
                 this.activeIndex = index
-                this.stopAutoplay()
-                this.startAutoplay()
+                {{-- this.stopAutoplay()
+                this.startAutoplay() --}}
             }
         }"
         class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 md:mr-[20%] items-stretch"
@@ -383,7 +392,7 @@
                         x-collapse.duration.300
                         class="flex-1 px-5 pb-5 pt-0"
                     >
-                        <div class="h-full overflow-y-auto text-gray-400 text-sm md:text-base leading-relaxed">
+                        <div class="h-full overflow-y-hidden text-gray-400 text-sm md:text-base leading-relaxed">
                             <div>
                                 {{ __('Content for first title. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.') }}
                             </div>
@@ -514,10 +523,10 @@
     <section id="call" class="mb-10 md:mb-60">
         <div class="section-head">{{ __('SCHEDULE A CALL') }}</div>
         <div class="content-big">{{ __('Lets talk') }}</div>
-        <div class="flex justify-center items-center mt-12">
-            <a href="{{ route('home', app()->getLocale()) }}" class="white_btn">
+        <div class="flex justify-center items-center mt-12" x-data>
+            <button @click="$store.contactModal.openModal()" class="white_btn">
                 {{ __('Book a Meeting') }}
-            </a>
+            </button>
         </div>
     </section>
 </div>

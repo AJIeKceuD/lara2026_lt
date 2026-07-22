@@ -188,7 +188,7 @@
                 <button @click="$store.contactModal.closeModal()" class="text-gray-400 hover:text-gray-600 text-2xl leading-none">✕</button>
             </div>
 
-            <div x-data="contactForm()" class="p-6 space-y-4">
+            <div x-data="contactForm()" class="p-6 space-y-4 contactus">
                 <form @submit.prevent="submitForm" class="space-y-4">
                     {{-- Успех --}}
                     <div x-show="success" x-transition class="bg-green-50 text-green-700 p-4 rounded-lg text-center">
