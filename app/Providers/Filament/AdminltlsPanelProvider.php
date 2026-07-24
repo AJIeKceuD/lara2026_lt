@@ -2,6 +2,8 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Widgets\ContactUsStats;
+use App\Filament\Widgets\RecentContactUs;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -40,6 +42,8 @@ class AdminltlsPanelProvider extends PanelProvider
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
+                ContactUsStats::class,
+                RecentContactUs::class,
             ])
             ->middleware([
                 EncryptCookies::class,

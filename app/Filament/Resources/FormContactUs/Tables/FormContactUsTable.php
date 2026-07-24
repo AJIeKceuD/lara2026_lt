@@ -30,6 +30,10 @@ class FormContactUsTable
                     ->label('ID')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('created_at')
+                    ->label('Date')
+                    ->dateTime('Y-m-d H:i:s')
+                    ->sortable(),
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
@@ -39,7 +43,7 @@ class FormContactUsTable
                     ->sortable(),
                 TextColumn::make('message')
                     ->label('Message Preview')
-                    ->limit(50)
+                    ->limit(30)
                     ->tooltip(fn ($record) => $record->message),
                 // TextColumn::make('ip_address')
                 //     ->searchable(),
@@ -67,10 +71,6 @@ class FormContactUsTable
                     ->trueColor('success')
                     ->falseColor('danger'),
                 TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
