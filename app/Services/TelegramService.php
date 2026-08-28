@@ -23,7 +23,7 @@ class TelegramService
 
         $url = "https://api.telegram.org/bot{$this->token}/sendMessage";
 
-        $response = Http::post($url, [
+        $response = Http::timeout(3)->post($url, [
             'chat_id' => $this->chatId,
             'text' => $message,
             'parse_mode' => 'HTML',
