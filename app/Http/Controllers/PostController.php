@@ -13,21 +13,22 @@ class PostController extends Controller
         // dd($locale);
         // $locale = app()->getLocale();
         app()->setLocale($locale);
-        
+
         $posts = Post::published()
+            ->whereTitleExists($locale)
             ->orderBy('published_at', 'desc')
             ->paginate(12);
-        
+
         return view('posts.index', compact('posts'));
     }
-    
+
     // Просмотр одного поста
     public function show(Request $request, $locale, $slug)
     {
         $post = Post::published()
             ->where("slug->{$locale}", $slug)
             ->firstOrFail();
-        
+
         return view('posts.show', compact('post'));
     }
 }

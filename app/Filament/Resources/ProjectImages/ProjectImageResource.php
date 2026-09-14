@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Filament\Resources\ProjectImages;
+
+use App\Filament\Resources\ProjectImages\Pages\CreateProjectImage;
+use App\Filament\Resources\ProjectImages\Pages\EditProjectImage;
+use App\Filament\Resources\ProjectImages\Pages\ListProjectImages;
+use App\Filament\Resources\ProjectImages\Pages\ViewProjectImage;
+use App\Filament\Resources\ProjectImages\Schemas\ProjectImageForm;
+use App\Filament\Resources\ProjectImages\Schemas\ProjectImageInfolist;
+use App\Filament\Resources\ProjectImages\Tables\ProjectImagesTable;
+use App\Models\ProjectImage;
+use BackedEnum;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+
+class ProjectImageResource extends Resource
+{
+    protected static ?string $model = ProjectImage::class;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    public static function form(Schema $schema): Schema
+    {
+        return ProjectImageForm::configure($schema);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return ProjectImageInfolist::configure($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return ProjectImagesTable::configure($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListProjectImages::route('/'),
+            'create' => CreateProjectImage::route('/create'),
+            'view' => ViewProjectImage::route('/{record}'),
+            'edit' => EditProjectImage::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getRecordRouteBindingEloquentQuery(): Builder
+    {
+        return parent::getRecordRouteBindingEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
+}

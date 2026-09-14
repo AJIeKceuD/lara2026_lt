@@ -37,7 +37,7 @@
                 @mouseleave="total > 1 && startAutoplay()"
                 class="relative w-full aspect-square mx-auto"
             >
-                <div class="relative w-full h-full rounded-[104px] overflow-hidden">
+                <div class="relative w-full h-full overflow-hidden">
                     @foreach($topImages as $index => $image)
                         <div
                             x-show="currentIndex === {{ $index }}"
@@ -46,7 +46,7 @@
                             <img
                                 src="{{ Storage::url($image->image_path) }}"
                                 alt="{{ $image->getTranslation('alt_text', $locale, false) ?? '' }}"
-                                class="w-full h-full object-contain"
+                                class="w-full h-full object-contain rounded-[104px]"
                                 loading="lazy"
                             >
                         </div>
@@ -131,9 +131,9 @@
         <div class="order-none max-sm:order-1 max-lg:ml-[10%] max-sm:ml-0">
             <div class="section-tags">{{ __('GAMES') }} • {{ __('SOFTWARE') }} • {{ __('USER MANUALS') }} • {{ __('HELP CENTER') }} • {{ __('MARKETING') }}</div>
             <div>
-                <h1>{{ __('Localization and LQA Services') }}</h1>
+                <h1 class="max-w-[600px] max-lg:max-w-[100%]">{{ __('Localization and LQA Services') }}</h1>
             </div>
-            <div class="mt-8 max-w-[380px] max-sm:max-w-[100%] text-[20px] max-sm:text-[19px] text-[#919191] max-lg:leading-tight">{{ __('Entrust your content to us — we’ll make it sound natural, relevant, and ready to perform in every market you target.') }}</div>
+            <div class="mt-8 max-w-[380px] max-sm:max-w-[100%] content-top">{{ __('Entrust your content to us — we’ll make it sound natural, relevant, and ready to perform in every market you target.') }}</div>
             <div class="mt-8 mb-4" x-data>
                 <button @click="$store.contactModal.openModal()" class="white_btn">
                     {{ __('Book a Call') }}
@@ -142,7 +142,8 @@
         </div>
     </section>
 
-    <section id="partners" class="mb-60 max-lg:mb-40 max-sm:mb-20">
+    {{--<section id="partners" class="mb-60 max-lg:mb-40 max-sm:mb-20">--}}
+    <section id="partners" class="mb-[132px] max-lg:mb-[196px] max-sm:mb-[87px]">
         <div class="slider-wrapper">
             <div class="slider-track">
                 {{-- @for ($copy = 0; $copy < 2; $copy++)
@@ -167,19 +168,21 @@
         </div>
     </section>
 
-    <section id="why_us" class="mb-60 max-lg:mb-40 max-sm:mb-20">
+    {{--<section id="why_us" class="mb-60 max-lg:mb-40 max-sm:mb-20">--}}
+    <section id="why_us" class="mb-[353px] max-lg:mb-[219px] max-sm:mb-[174px]">
         <div class="section-head">{{ __('WHY US') }}</div>
         <div class="content-big">{{ __('With over 15 years of experience, we specialize in localizing games, software, user manuals, help center content, and marketing materials. We ensure every piece of content serves your audience.') }}</div>
     </section>
 
-    <section id="news" class="mb-60 max-lg:mb-40 max-sm:mb-20">
+    {{--<section id="news" class="mb-60 max-lg:mb-40 max-sm:mb-20">--}}
+    <section id="news" class="mb-[198px] max-lg:mb-[164px] max-sm:mb-[122px]">
         <div class="section-head">{{ __('RELEASE LOG') }}</div>
 
         <h2>{{ __('NEWS & INSIGHTS') }}</h2>
 
-        <div class="flex border-b py-5">
+        {{--<div class="flex border-b py-5">
             <a href="{{ route('posts.index', app()->getLocale()) }}" class="btn-arrow ml-auto">{{ __('Read all posts') }}</a>
-        </div>
+        </div>--}}
 
         @forelse($latestPosts as $post)
         {{-- For PC --}}
@@ -194,7 +197,7 @@
                     // After 500ms show content
                     setTimeout(() => {
                         this.showContent = true;
-                    }, 300);
+                    }, 500);
                 },
                 hideContent() {
                     // First hide content
@@ -210,7 +213,7 @@
         >
             <div
                 :class="isCollapsed ? 'w-1/4' : 'w-full'"
-                class="py-4 transition-all duration-100 overflow-hidden"
+                class="py-4 transition-all duration-300 overflow-hidden"
             >
                 <div class="py-2">
                     <div
@@ -235,19 +238,20 @@
                 >
                     <div class="grid grid-cols-2 max-sm:grid-cols-1 gap-4">
                         <div class="order-none max-sm:order-2 py-4 px-3 post-body">
-                            <div>{{ Str::limit(strip_tags($post->content), 100) }}</div>
-                            <div class="my-6">{{ $post->published_at->isoFormat('D MMMM YYYY') }} • {{ $post->reading_time }} {{ __('MIN READ') }}</div>
-                            <div>
+                            <div class="max-lg:hidden post-text">{{ Str::limit(strip_tags($post->content), 500) }}</div>
+                            <div class="hidden max-lg:flex post-text">{{ Str::limit(strip_tags($post->content), 250) }}</div>
+                            <div class="my-6 post-date">{{ $post->published_at->isoFormat('D MMMM YYYY') }} • {{ $post->reading_time }} {{ __('MIN READ') }}</div>
+                            <div class="min-w-[205px] h-[30px]">
                                 <a href="{{ route('posts.show', [app()->getLocale(), $post->slug]) }}" class="view_btn">
                                     {{ __('View post') }}&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow-in-line">→</span>
                                 </a>
                             </div>
                         </div>
-                        <div class="order-none max-sm:order-1 py-4">
+                        <div class="order-none max-sm:order-1 py-4 pl-10">
                             @if($post->preview_image)
                                 <img src="{{ Storage::url($post->preview_image) }}"
                                     alt="{{ $post->title }}"
-                                    class="w-full h-48 object-cover rounded-[26px]">
+                                    class="w-full h-auto object-cover rounded-[26px]">
                             @endif
                         </div>
                     </div>
@@ -258,7 +262,14 @@
                 <button
                     @click="showContent ? hideContent() : toggleContent()"
                 >
-                    <span class="white-circle-updown" x-text="showContent ? '↑' : '↓'">&nbsp;</span>
+                    {{--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e4e4e4" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-[64px] h-[64px] flex-shrink-0"
+                        :class="isCollapsed ? '' : 'rotate-180'"
+                    >
+                        <circle cx="12" cy="12" r="10" fill="none" stroke="#e4e4e4"/>
+                        <path d="M12 17V8M9 11l3-3 3 3" stroke="#e4e4e4" stroke-width="1"/>
+                    </svg>--}}
+                    <div class="sprite-arrow sprite-arrow-62-bottom-black transition-transform duration-300" :class="isCollapsed ? 'rotate-180' : 'rotate-0'"></div>
                 </button>
             </div>
         </div>
@@ -285,7 +296,8 @@
 
                 <div class="ml-4 py-2">
                     <button @click="toggleContent()">
-                        <span class="white-circle-updown" x-text="showContent ? '↑' : '↓'">&nbsp;</span>
+                        {{--<span class="white-circle-updown" x-text="showContent ? '↑' : '↓'">&nbsp;</span>--}}
+                        <div class="sprite-arrow sprite-arrow-44-bottom-black transition-transform duration-300" :class="showContent ? 'rotate-180' : 'rotate-0'"></div>
                     </button>
                 </div>
             </div>
@@ -330,264 +342,49 @@
         @endforelse
     </section>
 
-    <section id="projects" class="mb-60 max-lg:mb-40 max-sm:mb-20">
+    {{--<section id="projects" class="mb-60 max-lg:mb-40 max-sm:mb-20">--}}
+    <section id="projects" class="mb-[236px] max-lg:mb-[166px] max-sm:mb-[136px]">
         <div class="section-head">{{ __('PROJECTS') }}</div>
 
-        <h2>{{ __('GAMES WE HELPED') }}<br />{{ __('BRING TO THE WORLD') }}</h2>
+        <div class="flex justify-center text-center">
+            <h2 class="max-w-[1004px] max-lg:max-w-[670px] ">{{ __('GAMES WE HELPED BRING TO THE WORLD') }}</h2>
+        </div>
+
+        @if($projectImages->count())
+        <div class="relative w-full overflow-hidden py-8">
+            <div class="flex animate-scroll">
+                @for($i=0;$i<=1;$i++) {{-- For dublicate --}}
+                    @foreach($projectImages as $image)
+                        <div class="projects_image group">
+                            <img
+                                src="{{ Storage::url($image->image_path) }}"
+                                alt="{{ $image->title }}"
+                                loading="lazy"
+                            >
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300 flex flex-col justify-between">
+                                <div class="flex w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 justify-center text-center pt-[80px]">
+                                    <h3>{{ $image->title }}</h3>
+                                </div>
+                                <div class="projects_comment flex w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 justify-center text-center pb-[80px]">
+                                    @if($image->comment)
+                                        {{ Str::limit(strip_tags($image->comment), 100) }}
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endfor
+            </div>
+        </div>
+        @endif
     </section>
 
-    <section id="services" class="mb-60 max-lg:mb-40 max-sm:mb-20">
+    {{--<section id="services" class="mb-60 max-lg:mb-40 max-sm:mb-20">--}}
+    <section id="services" class="mb-[128px] max-lg:mb-[112px] max-sm:mb-[68px]">
         <div class="section-head">{{ __('SERVICES') }}</div>
 
-        <h2>{{ __('COMPLETE CONTENT &') }}<br />{{ __('LOCALIZATION SOLUTIONS') }}</h2>
-
-        <div x-data="{
-            activeIndex: 0,
-            total: 4,
-            autoplayInterval: null,
-            autoplayDelay: 4000,
-            {{-- init() {
-                if (this.total > 1) this.startAutoplay()
-            },
-            startAutoplay() {
-                this.autoplayInterval = setInterval(() => {
-                    this.next()
-                }, this.autoplayDelay)
-            },
-            stopAutoplay() {
-                if (this.autoplayInterval) {
-                    clearInterval(this.autoplayInterval)
-                    this.autoplayInterval = null
-                }
-            }, --}}
-            next() {
-                this.activeIndex = (this.activeIndex + 1) % this.total
-            },
-            previous() {
-                this.activeIndex = (this.activeIndex - 1 + this.total) % this.total
-            },
-            goTo(index) {
-                this.activeIndex = index
-                {{-- this.stopAutoplay()
-                this.startAutoplay() --}}
-            }
-        }"
-        class="hidden grid grid-cols-2 gap-12 mr-[20%] items-stretch max-lg:mr-0"
-        >
-            {{-- ЛЕВАЯ ЧАСТЬ: Слайдер картинок --}}
-            <div class="relative w-full aspect-square bg-gray-100 rounded-2xl overflow-hidden shadow-lg">
-                <div
-                    x-show="activeIndex === 0"
-                    x-transition:enter="transition ease-out duration-500"
-                    x-transition:enter-start="opacity-0 scale-95"
-                    x-transition:enter-end="opacity-100 scale-100"
-                    x-transition:leave="transition ease-in duration-300"
-                    x-transition:leave-start="opacity-100 scale-100"
-                    x-transition:leave-end="opacity-0 scale-95"
-                    class="absolute inset-0 w-full h-full"
-                >
-                    <img src="/images/services/service_1.jpg" alt="Slide 1" class="w-full h-full object-cover">
-                </div>
-                <div
-                    x-show="activeIndex === 1"
-                    x-transition:enter="transition ease-out duration-500"
-                    x-transition:enter-start="opacity-0 scale-95"
-                    x-transition:enter-end="opacity-100 scale-100"
-                    x-transition:leave="transition ease-in duration-300"
-                    x-transition:leave-start="opacity-100 scale-100"
-                    x-transition:leave-end="opacity-0 scale-95"
-                    class="absolute inset-0 w-full h-full"
-                >
-                    <img src="/images/services/service_2.jpg" alt="Slide 2" class="w-full h-full object-cover">
-                </div>
-                <div
-                    x-show="activeIndex === 2"
-                    x-transition:enter="transition ease-out duration-500"
-                    x-transition:enter-start="opacity-0 scale-95"
-                    x-transition:enter-end="opacity-100 scale-100"
-                    x-transition:leave="transition ease-in duration-300"
-                    x-transition:leave-start="opacity-100 scale-100"
-                    x-transition:leave-end="opacity-0 scale-95"
-                    class="absolute inset-0 w-full h-full"
-                >
-                    <img src="/images/services/service_3.jpg" alt="Slide 3" class="w-full h-full object-cover">
-                </div>
-                <div
-                    x-show="activeIndex === 3"
-                    x-transition:enter="transition ease-out duration-500"
-                    x-transition:enter-start="opacity-0 scale-95"
-                    x-transition:enter-end="opacity-100 scale-100"
-                    x-transition:leave="transition ease-in duration-300"
-                    x-transition:leave-start="opacity-100 scale-100"
-                    x-transition:leave-end="opacity-0 scale-95"
-                    class="absolute inset-0 w-full h-full"
-                >
-                    <img src="/images/services/service_4.jpg" alt="Slide 4" class="w-full h-full object-cover">
-                </div>
-            </div>
-
-            {{-- ПРАВАЯ ЧАСТЬ: Аккордеон --}}
-            <div class="flex flex-col gap-2 h-full min-h-[700px] max-lg:min-h-[500px]">
-                {{-- Пункт 1 --}}
-                <div
-                    class="services-texts-child"
-                    :class="{
-                        'flex-1': activeIndex === 0,
-                        'flex-shrink-0': activeIndex !== 0
-                    }"
-                >
-                    <button @click="goTo(0)">
-                        <h3>
-                            {{ __('Software & Mobile App') }}
-                        </h3>
-                        {{-- <svg
-                            class="w-5 h-5 flex-shrink-0 transition-transform duration-300"
-                            :class="{
-                                'rotate-180 text-blue-600': activeIndex === 0,
-                                'text-gray-400': activeIndex !== 0
-                            }"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        >
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg> --}}
-                    </button>
-
-                    <div
-                        x-show="activeIndex === 0"
-                        x-collapse.duration.300
-                        class="flex-1 px-5 pb-5 pt-0"
-                    >
-                        <div class="h-full overflow-y-hidden leading-relaxed">
-                            <div>
-                                {{ __('Localization that feels native on every platform. We adapt interfaces with precision and creativity, ensuring every player experience stays authentic and seamless.') }}
-                            </div>
-                            <div class="mt-6 section-tags">
-                                {{ __('UI and UX Elements, Settings & Preferences, Technical Documentation, Knowledge Base or Help Center, Emails and Notifications, Release Notes, Manuals and Guides, User agreements and Terms of service.') }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Пункт 2 --}}
-                <div
-                    class="services-texts-child"
-                    :class="{
-                        'flex-1': activeIndex === 1,
-                        'flex-shrink-0': activeIndex !== 1
-                    }"
-                >
-                    <button @click="goTo(1)">
-                        <h3>
-                            {{ __('In-Game Experience') }}
-                        </h3>
-                        {{-- <svg
-                            class="w-5 h-5 flex-shrink-0 transition-transform duration-300"
-                            :class="{
-                                'rotate-180 text-blue-600': activeIndex === 1,
-                                'text-gray-400': activeIndex !== 1
-                            }"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        >
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg> --}}
-                    </button>
-
-                    <div
-                        x-show="activeIndex === 1"
-                        x-collapse.duration.300
-                        class="flex-1 px-5 pb-5 pt-0"
-                    >
-                        <div class="h-full overflow-y-auto leading-relaxed">
-                            <div>
-                                {{ __('Giving every story its true voice and emotional impact. From casting and recording to trailers, ads, and social media — we bring characters and worlds to life with high-quality voice work and cultural nuance.') }}
-                            </div>
-                            <div class="mt-6 section-tags">
-                                {{ __('UI and UX Elements, In-Game Text, Dialogs, Scripts, Tutorials, FAQs, Subtitles, troubleshooting guides, Song lyrics.') }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Пункт 3 --}}
-                <div
-                    class="services-texts-child"
-                    :class="{
-                        'flex-1': activeIndex === 2,
-                        'flex-shrink-0': activeIndex !== 2
-                    }"
-                >
-                    <button @click="goTo(2)">
-                        <h3>
-                            {{ __('Audio Production & Voice-Overing') }}
-                        </h3>
-                        {{-- <svg
-                            class="w-5 h-5 flex-shrink-0 transition-transform duration-300"
-                            :class="{
-                                'rotate-180 text-blue-600': activeIndex === 2,
-                                'text-gray-400': activeIndex !== 2
-                            }"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        >
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg> --}}
-                    </button>
-
-                    <div
-                        x-show="activeIndex === 2"
-                        x-collapse.duration.300
-                        class="flex-1 px-5 pb-5 pt-0"
-                    >
-                        <div class="h-full overflow-y-auto leading-relaxed">
-                            <div>
-                                {{ __('Live and database casting, authentic voices, pronunciation guides, sound design, script adaptation, recording studios and team.') }}
-                            </div>
-                            <div class="mt-6 section-tags">
-                                {{ __('Live and database casting, authentic voices, pronunciation guides, sound design, script adaptation, recording studios and team.') }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Пункт 4 --}}
-                <div
-                    class="services-texts-child"
-                    :class="{
-                        'flex-1': activeIndex === 3,
-                        'flex-shrink-0': activeIndex !== 3
-                    }"
-                >
-                    <button @click="goTo(3)">
-                        <h3>
-                            {{ __('Localization') }}
-                        </h3>
-                        {{-- <svg
-                            class="w-5 h-5 flex-shrink-0 transition-transform duration-300"
-                            :class="{
-                                'rotate-180 text-blue-600': activeIndex === 3,
-                                'text-gray-400': activeIndex !== 3
-                            }"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24"9
-                        >
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg> --}}
-                    </button>
-
-                    <div
-                        x-show="activeIndex === 3"
-                        x-collapse.duration.300
-                        class="flex-1 px-5 pb-5 pt-0"
-                    >
-                        <div class="">
-                            <div>
-                                {{ __('A blend of handcrafted and AI-powered translation ensures that even poems and jokes feel natural. With Translation Memory, style guides, glossaries, and cross-platform terminology, your content stays on brand and sounds native to the audience.') }}
-                            </div>
-                            <div class="mt-6 section-tags">
-                                {{ __('5 Recording studios, 40+ Successful projects, 15 Years on market, AI Hybrid Translation.') }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="flex justify-center text-center">
+            <h2 class="max-w-[1180px]">{{ __('COMPLETE CONTENT & LOCALIZATION SOLUTIONS') }}</h2>
         </div>
 
         <div
@@ -611,7 +408,7 @@
                     <img
                         src="/images/services/service_1.jpg"
                         alt="Software & Mobile App"
-                        class="w-full h-full object-contain rounded-[32px]"
+                        class="block w-full h-full object-cover rounded-[32px]"
                         loading="lazy"
                     >
                 </div>
@@ -631,7 +428,7 @@
                     <img
                         src="/images/services/service_2.jpg"
                         alt="In-Game Experience"
-                        class="w-full h-full object-contain rounded-[32px]"
+                        class="w-full h-full object-cover rounded-[32px]"
                         loading="lazy"
                     >
                 </div>
@@ -651,7 +448,7 @@
                     <img
                         src="/images/services/service_3.jpg"
                         alt="Audio Production & Voice-Overing"
-                        class="w-full h-full object-contain rounded-[32px]"
+                        class="w-full h-full object-cover rounded-[32px]"
                         loading="lazy"
                     >
                 </div>
@@ -671,7 +468,7 @@
                     <img
                         src="/images/services/service_4.jpg"
                         alt="Localization"
-                        class="w-full h-full object-contain rounded-[32px]"
+                        class="w-full h-full object-cover rounded-[32px]"
                         loading="lazy"
                     >
                 </div>
@@ -684,21 +481,22 @@
                     class="services-texts-child"
                 >
                     <button
-                        @click="activeIndex = activeIndex === 0 ? -1 : 0"
+                        @click="activeIndex = 0"
                     >
                         <h3>
                             {{ __('Software & Mobile App') }}
                         </h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e4e4e4" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"
+                        {{--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e4e4e4" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"
                             class="w-[64px] h-[64px] flex-shrink-0"
                             :class="{
-                                '': activeIndex === 0,
+                                'hidden': activeIndex === 0,
                                 'rotate-180': activeIndex !== 0
                             }"
                         >
                             <circle cx="12" cy="12" r="10" fill="none" stroke="#e4e4e4"/>
                             <path d="M12 17V8M9 11l3-3 3 3" stroke="#e4e4e4" stroke-width="1"/>
-                        </svg>
+                        </svg>--}}
+                        <div class="sprite-arrow sprite-arrow-48-bottom-black max-sm:sprite-arrow-44-bottom-black ml-[5px]" :class="{'hidden': activeIndex === 0, 'rotate-180': activeIndex !== 0}"></div>
                     </button>
 
                     <div
@@ -729,21 +527,22 @@
                     class="services-texts-child"
                 >
                     <button
-                        @click="activeIndex = activeIndex === 1 ? -1 : 1"
+                        @click="activeIndex = 1"
                     >
                         <h3>
                             {{ __('In-Game Experience') }}
                         </h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e4e4e4" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"
+                        {{--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e4e4e4" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"
                             class="w-[64px] h-[64px] flex-shrink-0"
                             :class="{
-                                '': activeIndex === 1,
+                                'hidden': activeIndex === 1,
                                 'rotate-180': activeIndex !== 1
                             }"
                         >
                             <circle cx="12" cy="12" r="10" fill="none" stroke="#e4e4e4"/>
                             <path d="M12 17V8M9 11l3-3 3 3" stroke="#e4e4e4" stroke-width="1"/>
-                        </svg>
+                        </svg>--}}
+                        <div class="sprite-arrow sprite-arrow-48-bottom-black max-sm:sprite-arrow-44-bottom-black ml-[5px]" :class="{'hidden': activeIndex === 1, 'rotate-180': activeIndex !== 1}"></div>
                     </button>
 
                     <div
@@ -774,21 +573,22 @@
                     class="services-texts-child"
                 >
                     <button
-                        @click="activeIndex = activeIndex === 2 ? -1 : 2"
+                        @click="activeIndex = 2"
                     >
                         <h3>
                             {{ __('Audio Production & Voice-Overing') }}
                         </h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e4e4e4" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"
+                        {{--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e4e4e4" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"
                             class="w-[64px] h-[64px] flex-shrink-0"
                             :class="{
-                                '': activeIndex === 2,
+                                'hidden': activeIndex === 2,
                                 'rotate-180': activeIndex !== 2
                             }"
                         >
                             <circle cx="12" cy="12" r="10" fill="none" stroke="#e4e4e4"/>
                             <path d="M12 17V8M9 11l3-3 3 3" stroke="#e4e4e4" stroke-width="1"/>
-                        </svg>
+                        </svg>--}}
+                        <div class="sprite-arrow sprite-arrow-48-bottom-black max-sm:sprite-arrow-44-bottom-black ml-[5px]" :class="{'hidden': activeIndex === 2, 'rotate-180': activeIndex !== 2}"></div>
                     </button>
 
                     <div
@@ -819,21 +619,22 @@
                     class="services-texts-child"
                 >
                     <button
-                        @click="activeIndex = activeIndex === 3 ? -1 : 3"
+                        @click="activeIndex = 3"
                     >
                         <h3>
                             {{ __('Localization') }}
                         </h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e4e4e4" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"
+                        {{--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e4e4e4" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"
                             class="w-16 h-16 flex-shrink-0"
                             :class="{
-                                '': activeIndex === 3,
+                                'hidden': activeIndex === 3,
                                 'rotate-180': activeIndex !== 3
                             }"
                         >
                             <circle cx="12" cy="12" r="10" fill="none" stroke="#e4e4e4"/>
                             <path d="M12 17V8M9 11l3-3 3 3" stroke="#e4e4e4" stroke-width="1"/>
-                        </svg>
+                        </svg>--}}
+                        <div class="sprite-arrow sprite-arrow-48-bottom-black max-sm:sprite-arrow-44-bottom-black ml-[5px]" :class="{'hidden': activeIndex === 3, 'rotate-180': activeIndex !== 3}"></div>
                     </button>
 
                     <div
@@ -862,7 +663,20 @@
         </div>
     </section>
 
-    <section id="call" class="mb-60 max-lg:mb-40 max-sm:mb-20">
+    {{--<section id="video" class="mb-60 max-lg:mb-40 max-sm:mb-20">--}}
+    {{--<section id="video" class="mb-[200px] max-lg:mb-[112px] max-sm:mb-[68px]">
+        <div class="grid grid-cols-2 gap-5">
+            <div class="order-none">
+                <img src="/images/video-anna.jpg" alt="{{ __('Video about Localization') }}" class="w-full h-auto rounded-[48px]">
+            </div>
+            <div class="order-none">
+                <img src="/images/video-studio.jpg" alt="{{ __('Video about Localization Studio') }}" class="w-full h-auto rounded-[96px]">
+            </div>
+        </div>
+    </section>--}}
+
+    {{--<section id="call" class="mb-60 max-lg:mb-40 max-sm:mb-20">--}}
+    <section id="call" class="mb-[182px] max-lg:mb-[176px] max-sm:mb-[292px]">
         <div class="section-head">{{ __('SCHEDULE A CALL') }}</div>
         <div class="content-big">{{ __('Let’s talk about your project, goals, and how we can bring them to life.') }}</div>
         <div class="flex justify-center items-center mt-12" x-data>

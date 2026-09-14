@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\TopImage;
+use App\Models\ProjectImage;
 
 class HomeController extends Controller
 {
@@ -12,7 +13,7 @@ class HomeController extends Controller
     {
         // Устанавливаем язык
         app()->setLocale($locale);
-        
+
         // Получаем последние 3 поста для главной
         $latestPosts = Post::published()
             ->whereTitleExists($locale)
@@ -25,7 +26,9 @@ class HomeController extends Controller
             ->forLocale($locale)
             ->get();
             // dd($topImages);
-        
-        return view('home', compact('locale', 'latestPosts', 'topImages'));
+
+        $projectImages = ProjectImage::published()->withTitleLocale()->get();
+
+        return view('home', compact('locale', 'latestPosts', 'topImages', 'projectImages'));
     }
 }

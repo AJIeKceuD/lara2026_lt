@@ -30,12 +30,12 @@ body {
 } */
 
 h1, h2 {
-    @apply text-[102px] max-lg:text-[58px] max-sm:text-[62px] font-bold mb-2 leading-none;
+    @apply text-[102px] max-lg:text-[66px] max-sm:text-[62px] font-bold mb-2 leading-[90%] tracking-[-2px];
     font-weight: normal;
     font-family: var(--font-display);
 }
 h2 {
-    @apply flex justify-center text-center mb-6;
+    @apply flex justify-center text-center max-sm:text-[42px] max-sm:leading-[100%] mb-6;
 }
 h3 {
     @apply text-[32px] max-lg:text-[28px] max-sm:text-[22px] font-normal mb-2 leading-none;
@@ -48,28 +48,28 @@ section[id] {
 }
 
 .section-head {
-    @apply flex justify-center mb-[40px];
-    color: #919191;
-    font-size: 20px;
-    font-weight: bold;
+    @apply flex justify-center mb-[40px] font-bold max-lg:font-normal max-sm:font-bold text-[#919191] text-[20px] max-sm:text-[14px] leading-[100%] tracking-[6%];
     font-family: var(--font-mono);
+}
+.content-top {
+    @apply font-normal text-[20px] max-sm:text-[19px] text-[#919191] max-lg:leading-tight;
+    font-family: var(--font-body);
 }
 .content-big {
-    @apply text-center text-[58px] max-lg:text-[48px] max-sm:text-[22px] max-sm:leading-none mx-70 max-lg:mx-20 max-sm:mx-0;
+    @apply text-center font-normal text-[58px] max-lg:text-[48px] max-sm:text-[32px] leading-[110%] tracking-[-2%] mx-70 max-lg:mx-20 max-sm:mx-0;
     font-family: var(--font-display);
-    font-weight: normal;
 }
 .section-tags {
-    @apply py-2;
-    font-size: 12px;
-    font-weight: bold;
+    @apply py-2 font-bold text-[#919191] text-[12px] leading-[130%] tracking-[6%];
     font-family: var(--font-mono);
-    color: #919191;
 }
 .post-body {
-    color:#919191;
+    @apply py-2 font-normal text-[#676768] max-sm:text-[#919191] text-[18px] max-sm:text-[15px] leading-[120%] tracking-[0px] max-sm:leading-[110%] max-lg:tracking-[-0.25px];
     font-family: var(--font-body);
-    font-size: 18px;
+}
+.post-body .post-date {
+    @apply text-[14px] leading-[100%] tracking-[6%] max-sm:leading-[110%];
+    font-family: var(--font-body);
 }
 
 .btn-arrow {
@@ -178,12 +178,40 @@ section[id] {
     font-size: 32px;
 }
 
+.sprite-arrow {
+    background-image: url('/images/arrow_sprite.png');
+    background-repeat: no-repeat;
+    background-size: 261px 500px;
+}
+
+/*.sprite-arrow-48-left { background-position: -82px -360px; width: 48px; height: 48px; }
+.sprite-arrow-48-top { background-position: -218px -360px; width: 48px; height: 48px; }
+.sprite-arrow-48-right { background-position: -354px -360px; width: 48px; height: 48px; }*/
+.sprite-arrow-62-left-black { background-position: -19px -20px; width: 62px; height: 62px; }
+.sprite-arrow-62-left-white { background-position: -19px -102px; width: 62px; height: 62px; }
+.sprite-arrow-62-bottom-black { background-position: -99px -20px; width: 62px; height: 62px; }
+.sprite-arrow-62-bottom-white { background-position: -99px -102px; width: 62px; height: 62px; }
+.sprite-arrow-62-top-black { background-position: -179px -20px; width: 62px; height: 62px; }
+.sprite-arrow-62-top-white { background-position: -179px -102px; width: 62px; height: 62px; }
+.sprite-arrow-48-left-black { background-position: -40px -180px; width: 48px; height: 48px; }
+.sprite-arrow-48-left-white { background-position: -40px -248px; width: 48px; height: 48px; }
+.sprite-arrow-48-bottom-black { background-position: -107px -180px; width: 48px; height: 48px; }
+.sprite-arrow-48-bottom-white { background-position: -107px -248px; width: 48px; height: 48px; }
+.sprite-arrow-48-top-black { background-position: -174px -180px; width: 48px; height: 48px; }
+.sprite-arrow-48-top-white { background-position: -174px -248px; width: 48px; height: 48px; }
+.sprite-arrow-44-left-black { background-position: -46px -312px; width: 44px; height: 44px; }
+.sprite-arrow-44-left-white { background-position: -46px -376px; width: 44px; height: 44px; }
+.sprite-arrow-44-bottom-black { background-position: -109px -312px; width: 44px; height: 44px; }
+.sprite-arrow-44-bottom-white { background-position: -109px -376px; width: 44px; height: 44px; }
+.sprite-arrow-44-top-black { background-position: -174px -312px; width: 44px; height: 44px; }
+.sprite-arrow-44-top-white { background-position: -174px -376px; width: 44px; height: 44px; }
+
 .services-texts-child {
     @apply border-b border-b-[#676768] overflow-hidden transition-all duration-300 flex flex-col;
 }
 
 .services-texts-child div:last-child {
-    @apply text-[#919191] text-[18px] leading-relaxed overflow-hidden;
+    @apply overflow-hidden text-[#919191] text-[18px] max-sm:text-[15px] leading-[120%] tracking-[0px] max-lg:tracking-[-0.25px] max-sm:tracking-[0px];
 }
 
 .services-texts-child button {
@@ -192,10 +220,11 @@ section[id] {
 }
 
 .services-texts-child button h3 {
-    @apply text-[28px] text-left;
+    @apply text-left font-normal text-[#FFFFFF] max-sm:text-[#e4e4e4] text-[28px] max-sm:text-[22px] leading-[120%] max-lg:leading-[110%] tracking-[0px];
 }
 .services-texts-child .section-tags {
-    @apply !text-[14px] uppercase;
+    @apply uppercase !text-[14px] leading-[140%] max-lg:leading-[110%] tracking-[6%];
+    font-family: var(--font-mono);
 }
 /* .services-texts-child button span.flex-1 {
     font-size: 32px;
@@ -284,3 +313,36 @@ section[id] {
     }
 }
 /* /Slider */
+
+.projects_image {
+    @apply relative max-w-[478px] h-auto flex-shrink-0 overflow-hidden rounded-[104px] mr-5;
+}
+.projects_image img {
+    @apply w-full h-full object-cover transition-transform duration-500 group-hover:scale-105;
+}
+.projects_image h3 {
+    @apply font-normal text-[#fff] text-[26px] max-lg:text-[26px] max-sm:text-[26px] leading-[100%] tracking-[6%];
+    font-family: var(--font-mono);
+}
+.projects_image .projects_comment {
+    @apply font-normal text-[#fff] text-[24px] max-lg:text-[24px] max-sm:text-[24px] leading-[120%] tracking-[0px];
+    font-family: var(--font-body);
+}
+@keyframes projects-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.animate-scroll {
+    animation: projects-scroll 60s linear infinite;
+    display: flex;
+    width: max-content;
+    will-change: transform;
+}
+.animate-scroll:hover {
+    animation-play-state: paused;
+}
+/*@media (max-width: 639px) {
+    .animate-scroll {
+        animation-duration: 60s;
+    }
+}*/

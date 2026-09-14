@@ -130,18 +130,42 @@
                         x-transition:leave="transition ease-in duration-150"
                         x-transition:leave-start="opacity-100 translate-y-0"
                         x-transition:leave-end="opacity-0 -translate-y-4"
-                        class="absolute top-full left-0 right-0 bg-black rounded-b-[40px] p-4 z-50 flex flex-col gap-2"
+                        class="absolute top-[0px] left-0 right-0 bg-black rounded-b-[40px] p-4 z-50 flex flex-col gap-2"
                         @click.away="mobileMenuOpen = false"
                     >
-                        <a href="{{ route('home', app()->getLocale()) }}#news" class="mobile_btn" @click="mobileMenuOpen = false">
-                            {{ __('Blog') }}
-                        </a>
-                        <a href="{{ route('home', app()->getLocale()) }}#projects" class="mobile_btn" @click="mobileMenuOpen = false">
-                            {{ __('Projects') }}
-                        </a>
-                        <a href="{{ route('home', app()->getLocale()) }}#services" class="mobile_btn" @click="mobileMenuOpen = false">
-                            {{ __('Services') }}
-                        </a>
+                        <div class="grid grid-cols-2">
+                            <div class="flex justify-left items-left">
+                                <a href="{{ route('home', app()->getLocale()) }}">
+                                    <img
+                                        src="/images/logo_white.png"
+                                        alt="Loki translate"
+                                        class="w-[45px] h-[45px]"
+                                    >
+                                </a>
+                            </div>
+                            <div class="ml-auto">
+                                <button
+                                    @click="mobileMenuOpen = false"
+                                    class="black_btn"
+                                    aria-label="Toggle menu"
+                                >{{ __('X') }}
+                            </div>
+                        </div>
+                        <div>
+                            <a href="{{ route('home', app()->getLocale()) }}#news" class="mobile_btn" @click="mobileMenuOpen = false">
+                                {{ __('Blog') }}
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{{ route('home', app()->getLocale()) }}#projects" class="mobile_btn" @click="mobileMenuOpen = false">
+                                {{ __('Projects') }}
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{{ route('home', app()->getLocale()) }}#services" class="mobile_btn" @click="mobileMenuOpen = false">
+                                {{ __('Services') }}
+                            </a>
+                        </div>
                         @foreach(['en', 'zh'] as $lang)
                             @php
                                 if (app()->getLocale() == $lang) {
@@ -162,9 +186,12 @@
                                 // Формируем новый URL с новым языком
                                 $newUrl = $pathWithoutLocale ? "/{$lang}/{$pathWithoutLocale}" : "/{$lang}";
                             @endphp
+                            <div>
                             <a href="{{ $newUrl }}" class="mobile_btn !text-[#919191]">
                                 {{ __("language." . $lang) }}
                             </a>
+                            </div>
+                            <div>
                         @endforeach
                     </div>
                 </div>
