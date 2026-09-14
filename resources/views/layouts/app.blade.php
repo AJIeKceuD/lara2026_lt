@@ -16,7 +16,7 @@
                 <div class="justify-start relative">
                     {{-- Десктопное меню --}}
                     <div class="flex items-center justify-start gap-2">
-                        @foreach(['en', 'zh'] as $lang)
+                        {{--@foreach(['en', 'zh'] as $lang)
                             @php
                                 if (app()->getLocale() == $lang) {
                                     continue;
@@ -43,7 +43,7 @@
                                 </svg>
                                 <span>&nbsp;{{ strtoupper($lang) }}</span>
                             </a>
-                        @endforeach
+                        @endforeach--}}
                         <a href="{{ route('home', app()->getLocale()) }}#news" class="black_btn">
                             {{ __('Blog') }}
                         </a>
@@ -68,31 +68,6 @@
                     <button @click="$store.contactModal.openModal()" class="white_btn">
                         {{ __('Book a Call') }}
                     </button>
-                    <!-- Language switcher -->
-                    {{--<div class="flex gap-2 ml-4">
-                        @foreach(['en', 'zh'] as $lang)
-                            @php
-                                // Получаем текущий путь БЕЗ языкового префикса
-                                $currentPath = request()->path();
-                                $segments = explode('/', $currentPath);
-
-                                // Убираем первый сегмент если это язык
-                                if (in_array($segments[0] ?? '', ['en', 'zh'])) {
-                                    array_shift($segments);
-                                }
-
-                                // Собираем путь без языка
-                                $pathWithoutLocale = implode('/', $segments);
-
-                                // Формируем новый URL с новым языком
-                                $newUrl = $pathWithoutLocale ? "/{$lang}/{$pathWithoutLocale}" : "/{$lang}";
-                            @endphp
-                            <a href="{{ $newUrl }}"
-                            class="{{ app()->getLocale() == $lang ? 'font-bold text-blue-600' : '' }}">
-                                {{ strtoupper($lang) }}
-                            </a>
-                        @endforeach
-                    </div>--}}
                 </div>
             </div>
 
@@ -166,7 +141,7 @@
                                 {{ __('Services') }}
                             </a>
                         </div>
-                        @foreach(['en', 'zh'] as $lang)
+                        {{--@foreach(['en', 'zh'] as $lang)
                             @php
                                 if (app()->getLocale() == $lang) {
                                     continue;
@@ -192,51 +167,10 @@
                             </a>
                             </div>
                             <div>
-                        @endforeach
+                        @endforeach--}}
                     </div>
                 </div>
             </div>
-
-            {{--<div class="flex justify-between items-center">
-                <div class="flex gap-4">
-                    <a href="{{ route('home', app()->getLocale()) }}" class="hover:text-blue-600">
-                        {{ __('Home') }}
-                    </a>
-                    <a href="{{ route('posts.index', app()->getLocale()) }}" class="hover:text-blue-600">
-                        {{ __('Posts') }}
-                    </a>
-
-                    <div class="flex gap-2 ml-4">
-                        @foreach(['en', 'zh'] as $lang)
-                            @php
-                                // Получаем текущий путь БЕЗ языкового префикса
-                                $currentPath = request()->path();
-                                $segments = explode('/', $currentPath);
-
-                                // Убираем первый сегмент если это язык
-                                if (in_array($segments[0] ?? '', ['en', 'zh'])) {
-                                    array_shift($segments);
-                                }
-
-                                // Собираем путь без языка
-                                $pathWithoutLocale = implode('/', $segments);
-
-                                // Формируем новый URL с новым языком
-                                $newUrl = $pathWithoutLocale ? "/{$lang}/{$pathWithoutLocale}" : "/{$lang}";
-                            @endphp
-                            <a href="{{ $newUrl }}"
-                            class="{{ app()->getLocale() == $lang ? 'font-bold text-blue-600' : '' }}">
-                                {{ strtoupper($lang) }}
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="items-center justify-center">
-                    <a href="{{ route('home', app()->getLocale()) }}" class="text-xl font-bold">
-                        {{ config('app.name') }}
-                    </a>
-                </div>
-            </div>--}}
         </div>
     </nav>
 

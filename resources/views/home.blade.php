@@ -353,7 +353,7 @@
 
         @if($projectImages->count())
         <div class="relative w-full overflow-hidden py-8">
-            <div class="flex animate-scroll">
+            <div class="flex animate-scroll-projects" style="--scroll-duration: {{ $projectImages->count() * 30 }}s;">
                 @for($i=0;$i<=1;$i++) {{-- For dublicate --}}
                     @foreach($projectImages as $image)
                         <div class="projects_image group">

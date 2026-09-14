@@ -332,17 +332,17 @@ section[id] {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
-.animate-scroll {
-    animation: projects-scroll 60s linear infinite;
+.animate-scroll-projects {
+    animation: projects-scroll var(--scroll-duration, 60s) linear infinite;
     display: flex;
     width: max-content;
     will-change: transform;
 }
-.animate-scroll:hover {
+.animate-scroll-projects:hover {
     animation-play-state: paused;
 }
 /*@media (max-width: 639px) {
-    .animate-scroll {
+    .animate-scroll-projects {
         animation-duration: 60s;
     }
 }*/
