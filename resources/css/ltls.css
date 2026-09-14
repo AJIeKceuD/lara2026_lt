@@ -244,18 +244,18 @@ section[id] {
 .slider-track {
     display: flex;
     width: max-content;
-    animation: infiniteScroll 40s linear infinite;
+    animation: infiniteScroll 90s linear infinite;
 }
 
 .slide {
     width: 340px;
-    height: 220px;
+    height: 240px;
     /* aspect-ratio: 16 / 9; */
     flex-shrink: 0;
 
     background-image: url('/images/partners.png');
-    /* background-size: 500% 100%;
-    background-size: cover; */
+    background-size: 3679px 326px;
+    /*background-size: cover; */
     background-repeat: no-repeat;
     background-position: var(--bg-pos, 0% 0%);
 }

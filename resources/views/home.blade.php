@@ -46,7 +46,7 @@
                             <img
                                 src="{{ Storage::url($image->image_path) }}"
                                 alt="{{ $image->getTranslation('alt_text', $locale, false) ?? '' }}"
-                                class="w-full h-full object-contain rounded-[104px]"
+                                class="w-full h-full object-cover rounded-[104px]"
                                 loading="lazy"
                             >
                         </div>
@@ -154,16 +154,17 @@
                         ></div>
                     @endforeach
                 @endfor --}}
-                <div class="slide" style="background-position-x: 0%;"></div>
-                <div class="slide" style="background-position-x: 25%;"></div>
-                <div class="slide" style="background-position-x: 50%;"></div>
-                <div class="slide" style="background-position-x: 75%;"></div>
-                <div class="slide" style="background-position-x: 100%;"></div>
-                <div class="slide" style="background-position-x: 0%;"></div>
-                <div class="slide" style="background-position-x: 25%;"></div>
-                <div class="slide" style="background-position-x: 50%;"></div>
-                <div class="slide" style="background-position-x: 75%;"></div>
-                <div class="slide" style="background-position-x: 100%;"></div>
+                @for($i=0;$i<=1;$i++) {{-- For dublicate --}}
+                <div class="slide" style="background-position-x: -80px;"></div>
+                <div class="slide" style="background-position-x: -455px;"></div>
+                <div class="slide" style="background-position-x: -850px;"></div>
+                <div class="slide" style="background-position-x: -1285px;"></div>
+                <div class="slide" style="background-position-x: -1700px;"></div>
+                <div class="slide" style="background-position-x: -2110px;"></div>
+                <div class="slide" style="background-position-x: -2487px;"></div>
+                <div class="slide" style="background-position-x: -2850px;"></div>
+                <div class="slide" style="background-position-x: -3233px;"></div>
+                @endfor
             </div>
         </div>
     </section>
