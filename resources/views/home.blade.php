@@ -210,7 +210,7 @@
                     }, 100);
                 }
             }"
-            class="flex max-sm:hidden border-b py-3"
+            class="flex max-lg:hidden max-sm:hidden border-t border-t-[#676768] pt-2"
         >
             <div
                 :class="isCollapsed ? 'w-1/4' : 'w-full'"
@@ -221,7 +221,7 @@
                         @click="showContent ? hideContent() : toggleContent()"
                         class="flex justify-between items-center cursor-pointer"
                     >
-                        <h3 class="">{{ $post->title }}</h3>
+                        <h3 class="">{{ $post->preview_title ?? $post->title }}</h3>
                     </div>
                 </div>
             </div>
@@ -238,17 +238,17 @@
                     class=""
                 >
                     <div class="grid grid-cols-2 max-sm:grid-cols-1 gap-4">
-                        <div class="order-none max-sm:order-2 py-4 px-3 post-body">
-                            <div class="max-lg:hidden post-text">{{ Str::limit(strip_tags($post->content), 500) }}</div>
-                            <div class="hidden max-lg:flex post-text">{{ Str::limit(strip_tags($post->content), 250) }}</div>
-                            <div class="my-6 post-date">{{ $post->published_at->isoFormat('D MMMM YYYY') }} • {{ $post->reading_time }} {{ __('MIN READ') }}</div>
-                            <div class="min-w-[205px] h-[30px]">
+                        <div class="order-none max-sm:order-2 post-body">
+                            <div class="post-text">{{ Str::limit(strip_tags($post->content), 500) }}</div>
+                            {{-- <div class="hidden max-lg:flex post-text">{{ Str::limit(strip_tags($post->content), 250) }}</div> --}}
+                            <div class="post-date">{{ $post->published_at->isoFormat('D MMMM YYYY') }} • {{ $post->reading_time }} {{ __('MIN READ') }}</div>
+                            <div class="post-button">
                                 <a href="{{ route('posts.show', [app()->getLocale(), $post->slug]) }}" class="view_btn">
-                                    {{ __('View post') }}&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow-in-line">→</span>
+                                    <div>{{ __('View post') }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                 </a>
                             </div>
                         </div>
-                        <div class="order-none max-sm:order-1 py-4 pl-10">
+                        <div class="order-none max-sm:order-1 py-6 pl-10">
                             @if($post->preview_image)
                                 <img src="{{ Storage::url($post->preview_image) }}"
                                     alt="{{ $post->title }}"
@@ -274,6 +274,71 @@
                 </button>
             </div>
         </div>
+        {{-- For pad devices --}}
+        <div
+            x-data="{
+                showContent: false,
+                toggleContent() {
+                    this.showContent = !this.showContent;
+                }
+            }"
+            class="hidden max-lg:flex max-sm:hidden flex-col max-sm:flex-col border-b py-3"
+        >
+            {{-- Верхняя строка: заголовок + стрелка (всегда видна) --}}
+            <div class="flex items-center justify-between w-full" @click="toggleContent()">
+                <div class="" :class="showContent ? 'invisible' : 'flex'">
+                    <h3 class="cursor-pointer hover:text-blue-600 transition">
+                        {{ $post->preview_title ?? $post->title }}
+                    </h3>
+                </div>
+                <div class="ml-4 py-2">
+                    <button>
+                        <div class="sprite-arrow sprite-arrow-44-bottom-black transition-transform duration-300" :class="showContent ? 'rotate-180' : 'rotate-0'"></div>
+                    </button>
+                </div>
+            </div>
+
+            {{-- Контент (раскрывается под заголовком) --}}
+            <div
+                x-show="showContent"
+                x-transition:enter="transition-all duration-300 ease-out"
+                x-transition:enter-start="opacity-0 -translate-y-4"
+                x-transition:enter-end="opacity-100 translate-y-0"
+                x-transition:leave="transition-all duration-200 ease-in"
+                x-transition:leave-start="opacity-100 translate-y-0"
+                x-transition:leave-end="opacity-0 -translate-y-4"
+                class="w-full overflow-hidden"
+            >
+                <div class="grid grid-cols-2 mb-[34px]">
+                    <div class="order-none px-3 post-body">
+                        <div class="">
+                            <h3
+                                @click="toggleContent()"
+                                class="cursor-pointer hover:text-blue-600 transition"
+                            >
+                                {{ $post->preview_title ?? $post->title }}
+                            </h3>
+                        </div>
+                        <div class="post-text">{{ Str::limit(strip_tags($post->content), 100) }}</div>
+                        <div class="post-date">
+                            {{ $post->published_at->isoFormat('D MMMM YYYY') }} • {{ $post->reading_time }} {{ __('MIN READ') }}
+                        </div>
+                    </div>
+                    <div class="order-none">
+                        @if($post->preview_image)
+                            <img src="{{ Storage::url($post->preview_image) }}"
+                                alt="{{ $post->title }}"
+                                class="w-full h-48 object-cover rounded-[26px]">
+                        @endif
+                    </div>
+                </div>
+                <div class="post-button mb-[28px]">
+                    <a href="{{ route('posts.show', [app()->getLocale(), $post->slug]) }}" class="view_btn">
+                        <div>{{ __('View post') }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    </a>
+                </div>
+            </div>
+        </div>
         {{-- For mobile devices --}}
         <div
             x-data="{
@@ -291,7 +356,7 @@
                         @click="toggleContent()"
                         class="cursor-pointer hover:text-blue-600 transition"
                     >
-                        {{ $post->title }}
+                        {{ $post->preview_title ?? $post->title }}
                     </h3>
                 </div>
 
@@ -316,7 +381,7 @@
             >
                 <div class="grid grid-cols-1">
                     {{-- Картинка --}}
-                    <div class="order-1">
+                    <div class="order-1 mb-[15px]">
                         @if($post->preview_image)
                             <img src="{{ Storage::url($post->preview_image) }}"
                                 alt="{{ $post->title }}"
@@ -325,13 +390,13 @@
                     </div>
                     {{-- Текст --}}
                     <div class="order-2 px-3 post-body">
-                        <div>{{ Str::limit(strip_tags($post->content), 100) }}</div>
-                        <div class="my-6 text-sm text-gray-500">
+                        <div class="post-text">{{ Str::limit(strip_tags($post->content), 100) }}</div>
+                        <div class="post-date">
                             {{ $post->published_at->isoFormat('D MMMM YYYY') }} • {{ $post->reading_time }} {{ __('MIN READ') }}
                         </div>
-                        <div>
-                            <a href="{{ route('posts.show', [app()->getLocale(), $post->slug]) }}" class="view_btn inline-flex justify-center items-center w-full">
-                                {{ __('View post') }}&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow-in-line pb-[10px]">→</span>
+                        <div class="post-button">
+                            <a href="{{ route('posts.show', [app()->getLocale(), $post->slug]) }}" class="view_btn">
+                                <div>{{ __('View post') }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                             </a>
                         </div>
                     </div>
@@ -341,6 +406,7 @@
         @empty
             <div></div>
         @endforelse
+        <div class="flex max-sm:hidden border-t border-t-[#676768]">&nbsp;</div>
     </section>
 
     {{--<section id="projects" class="mb-60 max-lg:mb-40 max-sm:mb-20">--}}
@@ -352,31 +418,38 @@
         </div>
 
         @if($projectImages->count())
-        <div class="relative w-full overflow-hidden py-8">
-            <div class="flex animate-scroll-projects" style="--scroll-duration: {{ $projectImages->count() * 30 }}s;">
-                @for($i=0;$i<=1;$i++) {{-- For dublicate --}}
-                    @foreach($projectImages as $image)
-                        <div class="projects_image group">
-                            <img
-                                src="{{ Storage::url($image->image_path) }}"
-                                alt="{{ $image->title }}"
-                                loading="lazy"
+            <div class="relative w-full overflow-hidden py-8" x-data="{ activeImage: null }">
+                <div class="flex animate-scroll-projects" style="--scroll-duration: {{ $projectImages->count() * 30 }}s;">
+                    @for($i=0;$i<=1;$i++)
+                        @foreach($projectImages as $image)
+                            <div class="projects_image group"
+                                @click="activeImage = activeImage === {{ $image->id }} ? null : {{ $image->id }}"
                             >
-                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-all duration-300 flex flex-col justify-between">
-                                <div class="flex w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 justify-center text-center pt-[80px]">
-                                    <h3>{{ $image->title }}</h3>
-                                </div>
-                                <div class="projects_comment flex w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 justify-center text-center pb-[80px]">
-                                    @if($image->comment)
-                                        {{ Str::limit(strip_tags($image->comment), 100) }}
-                                    @endif
+                                <img
+                                    src="{{ Storage::url($image->image_path) }}"
+                                    alt="{{ $image->title }}"
+                                    loading="lazy"
+                                >
+                                <div
+                                    class="absolute inset-0 transition-all duration-300 flex flex-col justify-between"
+                                    :class="activeImage === {{ $image->id }}
+                                        ? 'bg-black/60 opacity-100'
+                                        : 'bg-black/0 opacity-0 md:group-hover:bg-black/60 md:group-hover:opacity-100'"
+                                >
+                                    <div class="flex w-full justify-center text-center pt-[80px]">
+                                        <h3>{{ $image->title }}</h3>
+                                    </div>
+                                    <div class="projects_comment flex w-full justify-center text-center pb-[80px]">
+                                        @if($image->comment)
+                                            {{ Str::limit(strip_tags($image->comment), 1000) }}
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
-                @endfor
+                        @endforeach
+                    @endfor
+                </div>
             </div>
-        </div>
         @endif
     </section>
 

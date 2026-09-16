@@ -14,13 +14,19 @@ class PostInfolist
     {
         $locales = ['en' => 'English', 'zh' => '中文'];
         $tabs = [];
-        
+
         foreach ($locales as $locale => $label) {
             $tabs[] = Tabs\Tab::make($label)
                 ->schema([
                     TextEntry::make("title_{$locale}")
                         ->label("Title")
                         ->getStateUsing(fn ($record) => $record->getTranslation('title', $locale, false)),
+                    TextEntry::make("preview_title_{$locale}")
+                        ->label("Preview Title")
+                        ->getStateUsing(fn ($record) => $record->getTranslation('preview_title', $locale, false)),
+                    TextEntry::make("meta_desc_{$locale}")
+                        ->label("Meta Description")
+                        ->getStateUsing(fn ($record) => $record->getTranslation('meta_desc', $locale, false)),
                     TextEntry::make("slug_{$locale}")
                         ->label("Slug")
                         ->getStateUsing(fn ($record) => $record->getTranslation('slug', $locale, false)),
@@ -28,6 +34,9 @@ class PostInfolist
                         ->label("Content")
                         ->getStateUsing(fn ($record) => $record->getTranslation('content', $locale, false))
                         ->html(),
+                    TextEntry::make("main_image_alt_{$locale}")
+                        ->label("Main Image Desc ({$label})")
+                        ->getStateUsing(fn ($record) => $record->getTranslation('main_image_alt', $locale, false)),
                 ]);
         }
 
@@ -40,6 +49,10 @@ class PostInfolist
                 ImageEntry::make('preview_image')
                     // ->disk('public')
                     // ->visibility('public')
+                    ->placeholder('-'),
+                ImageEntry::make('main_image')
+                    // ->label('Main Image')
+                    // ->disk('public')
                     ->placeholder('-'),
                 TextEntry::make('published_at')
                     ->dateTime()

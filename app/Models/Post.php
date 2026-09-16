@@ -15,9 +15,13 @@ class Post extends Model
     // Поля, которые можно массово заполнять
     protected $fillable = [
         'title',
+        'preview_title',
+        'meta_desc',
         'slug',
         'content',
         'preview_image',
+        'main_image',
+        'main_image_alt',
         'published_at',
         'reading_time',
     ];
@@ -25,8 +29,11 @@ class Post extends Model
     // Поля, которые будут переводиться
     public array $translatable = [
         'title',
+        'preview_title',
+        'meta_desc',
         'slug',
         'content',
+        'main_image_alt',
     ];
 
     // Преобразование типов

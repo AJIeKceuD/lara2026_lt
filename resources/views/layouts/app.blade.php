@@ -186,7 +186,7 @@
                 class="w-[45px] h-[45px]"
             >
         </div>
-        <div class="mt-6 mb-6 section-tags">
+        <div class="uppercase mt-6 mb-6 section-tags">
             © {{ date('Y') }} {{ __('Loki Solutions Ltd. All rights reserved. Mongkok, Hong Kong') }}{{-- config('app.name') --}}
         </div>
     </footer>

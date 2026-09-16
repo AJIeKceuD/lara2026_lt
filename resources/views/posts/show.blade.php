@@ -3,26 +3,41 @@
 @section('title', $post->title)
 
 @section('content')
-<article class="container mx-auto px-4 py-8">
-    <header class="mb-8">
-        <h1>{{ $post->title }}</h1>
+<article class="post-object container mx-auto px-4 mt-[128px] max-sm:mt-[71px] mb-[200px]">
+    @php $locale = app()->getLocale(); @endphp
 
-        <div class="flex items-center text-gray-600 mb-6">
-            <span>{{ $post->published_at->isoFormat('D MMMM YYYY') }}</span>
-            @if($post->reading_time)
-                <span>• {{ $post->reading_time }} {{ __('MIN READ') }}</span>
-            @endif
+    <h1>
+        {{ $post->title }}
+    </h1>
+
+    @if($post->getTranslation('main_image_alt', $locale, false))
+        <div class="main-image-alt">
+            {{ $post->getTranslation('main_image_alt', $locale) }}
         </div>
-    </header>
+    @endif
 
-    <div class="prose prose-lg max-w-none">
-        {!! $post->content !!}
+    @if($post->main_image)
+        <div class="main-image w-full mb-20 max-sm:mb-[24px]">
+            <img
+                src="{{ Storage::url($post->main_image) }}"
+                alt="{{ $post->getTranslation('main_image_alt', $locale, false) ?? $post->title }}"
+                class="w-full h-auto object-cover rounded-t-[104px]"
+                loading="lazy"
+            >
+        </div>
+    @endif
+
+    <div class="grid grid-cols-2 max-lg:grid-cols-1">
+        <div class="post-content max-lg:order-2 max-lg:col-span-2">
+            {!! $post->content !!}
+        </div>
+
+        <aside class="published-at max-lg:order-1 max-lg:col-span-2 ml-[50%] max-lg:ml-[0%]">
+            <hr>
+            <div>
+                {{ $post->published_at?->isoFormat('D MMMM YYYY') }}
+            </div>
+        </aside>
     </div>
-
-    {{--<div class="mt-8">
-        <a href="{{ route('posts.index', app()->getLocale()) }}" class="black_btn">
-            {{ __('Back to posts') }}&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow-in-line">→</span>
-        </a>
-    </div>--}}
 </article>
 @endsection

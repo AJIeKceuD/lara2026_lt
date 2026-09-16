@@ -41,14 +41,19 @@ class ProjectImagesTable
                 // TextColumn::make('published_at')
                 //     ->dateTime()
                 //     ->sortable(),
-                IconColumn::make('published_at')
+                TextColumn::make('published_at')
                     ->label('Published')
-                    ->boolean()
-                    ->trueIcon('heroicon-o-check-circle')
-                    ->falseIcon('heroicon-o-clock')
-                    ->trueColor('success')
-                    ->falseColor('warning')
-                    ->getStateUsing(fn ($record) => $record->isPublished()),
+                    ->icon(fn ($record) => $record->isPublished()
+                        ? 'heroicon-o-check-circle'
+                        : 'heroicon-o-clock'
+                    )
+                    ->iconColor(fn ($record) => $record->isPublished() ? 'success' : 'warning')
+                    // ->color(fn ($record) => $record->isPublished() ? 'success' : 'warning')
+                    ->formatStateUsing(fn ($record) => $record->published_at
+                        ? $record->published_at->format('Y-m-d H:i')
+                        : 'Draft'
+                    )
+                    ->sortable(),
                 TextColumn::make('deleted_at')
                     ->label('Status')
                     ->badge()
