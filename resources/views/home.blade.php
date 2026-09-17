@@ -129,11 +129,11 @@
         @endif
         </div>--}}
         <div class="order-none max-sm:order-1 max-lg:ml-[10%] max-sm:ml-0">
-            <div class="section-tags">{{ __('GAMES') }} • {{ __('SOFTWARE') }} • {{ __('USER MANUALS') }} • {{ __('HELP CENTER') }} • {{ __('MARKETING') }}</div>
+            <div class="section-tags">{{ __('GAMES') }} • {{ __('SOFTWARE') }} • {{ __('MOBILE APPS') }} • {{ __('VOICEOVER') }} • {{ __('AD CREATIVE') }}</div>
             <div>
                 <h1 class="max-w-[600px] max-lg:max-w-[100%]">{{ __('Localization and LQA Services') }}</h1>
             </div>
-            <div class="mt-8 max-w-[380px] max-sm:max-w-[100%] content-top">{{ __('Entrust your content to us — we’ll make it sound natural, relevant, and ready to perform in every market you target.') }}</div>
+            <div class="mt-8 max-w-[380px] max-sm:max-w-[100%] content-top">{{ __("Entrust your content to us. It'll sound native, not translated, and ready to perform in every market you target.") }}</div>
             <div class="mt-8 mb-4" x-data>
                 <button @click="$store.contactModal.openModal()" class="white_btn">
                     {{ __('Book a Call') }}
@@ -172,12 +172,12 @@
     {{--<section id="why_us" class="mb-60 max-lg:mb-40 max-sm:mb-20">--}}
     <section id="why_us" class="mb-[353px] max-lg:mb-[219px] max-sm:mb-[174px]">
         <div class="section-head">{{ __('WHY US') }}</div>
-        <div class="content-big">{{ __('With over 15 years of experience, we specialize in localizing games, software, user manuals, help center content, and marketing materials. We ensure every piece of content serves your audience.') }}</div>
+        <div class="content-big">{{ __('Big studio results. Small studio prices. Fifteen years of turnkey localization, from first line to final release, for AAA blockbusters and indie debuts alike, taught us to work at the level of the biggest studios in the business.') }}</div>
     </section>
 
     {{--<section id="news" class="mb-60 max-lg:mb-40 max-sm:mb-20">--}}
     <section id="news" class="mb-[198px] max-lg:mb-[164px] max-sm:mb-[122px]">
-        <div class="section-head">{{ __('RELEASE LOG') }}</div>
+        <div class="section-head">{{ __('BLOG') }}</div>
 
         <h2>{{ __('NEWS & INSIGHTS') }}</h2>
 
@@ -414,12 +414,12 @@
         <div class="section-head">{{ __('PROJECTS') }}</div>
 
         <div class="flex justify-center text-center">
-            <h2 class="max-w-[1004px] max-lg:max-w-[670px] ">{{ __('GAMES WE HELPED BRING TO THE WORLD') }}</h2>
+            <h2 class="max-w-[1004px] max-lg:max-w-[670px] mb-[58px] max-lg:mb-[36px] max-sm:mb-[44px]">{{ __('GAMES WE HELPED BRING TO THE WORLD') }}</h2>
         </div>
 
         @if($projectImages->count())
             <div class="relative w-full overflow-hidden py-8" x-data="{ activeImage: null }">
-                <div class="flex animate-scroll-projects" style="--scroll-duration: {{ $projectImages->count() * 30 }}s;">
+                <div class="flex animate-scroll-projects" style="--scroll-duration: {{ $projectImages->count() * 10 }}s;">
                     @for($i=0;$i<=1;$i++)
                         @foreach($projectImages as $image)
                             <div class="projects_image group"
@@ -458,7 +458,7 @@
         <div class="section-head">{{ __('SERVICES') }}</div>
 
         <div class="flex justify-center text-center">
-            <h2 class="max-w-[1180px]">{{ __('COMPLETE CONTENT & LOCALIZATION SOLUTIONS') }}</h2>
+            <h2 class="max-w-[1180px] mb-[90px] max-lg:mb-[113px] max-sm:mb-[28px]">{{ __('WHAT WE DO') }}</h2>
         </div>
 
         <div
@@ -580,10 +580,10 @@
                     >
                         <div class="">
                             <div>
-                                {{ __('Localization that feels native on every platform. We adapt interfaces with precision and creativity, ensuring every player experience stays authentic and seamless.') }}
+                                {{ __("We build localization into your product pipeline from day one. That means adapting to each platform's specifics while development is still moving, so your product ships fully localized, exactly on schedule.") }}
                             </div>
                             <div class="mt-6 section-tags">
-                                {{ __('UI and UX Elements, Settings & Preferences, Technical Documentation, Knowledge Base or Help Center, Emails and Notifications, Release Notes, Manuals and Guides, User agreements and Terms of service.') }}
+                                {{ __('UI and UX Elements, Knowledge Base, Emails and Notifications, Release Notes, User agreements and Terms of service.') }}
                             </div>
                             <div>&nbsp;</div>
                             <div class="hidden max-sm:flex">
@@ -626,10 +626,10 @@
                     >
                         <div class="">
                             <div>
-                                {{ __('Giving every story its true voice and emotional impact. From casting and recording to trailers, ads, and social media — we bring characters and worlds to life with high-quality voice work and cultural nuance.') }}
+                                {{ __('Games that sound native, not translated. We stay close to the source, so tone and character survive the trip, and your story gets rebuilt gently in every language.') }}
                             </div>
                             <div class="mt-6 section-tags">
-                                {{ __('UI and UX Elements, In-Game Text, Dialogs, Scripts, Tutorials, FAQs, Subtitles, troubleshooting guides, Song lyrics.') }}
+                                {{ __('In-Game Text, Dialogs, Scripts, Tutorials, Subtitles, Store Descriptions.') }}
                             </div>
                             <div>&nbsp;</div>
                             <div class="hidden max-sm:flex">
@@ -650,7 +650,7 @@
                         @click="activeIndex = 2"
                     >
                         <h3>
-                            {{ __('Audio Production & Voice-Overing') }}
+                            {{ __('Voice-Overing') }}
                         </h3>
                         {{--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e4e4e4" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"
                             class="w-[64px] h-[64px] flex-shrink-0"
@@ -672,10 +672,10 @@
                     >
                         <div class="">
                             <div>
-                                {{ __('Live and database casting, authentic voices, pronunciation guides, sound design, script adaptation, recording studios and team.') }}
+                                {{ __("We cast live and from our database with over 200 talents. Only real voices, no AI. Every line gets adapted to match rhythm and timing before it hits the mic, and our sound design brings it into your game's world. Recording is fully transparent, you're always welcome to join the session.") }}
                             </div>
                             <div class="mt-6 section-tags">
-                                {{ __('Live and database casting, authentic voices, pronunciation guides, sound design, script adaptation, recording studios and team.') }}
+                                {{ __('Authentic voices, pronunciation guides, sound design, script adaptation, recording studios and team.') }}
                             </div>
                             <div>&nbsp;</div>
                             <div class="hidden max-sm:flex">
@@ -696,7 +696,7 @@
                         @click="activeIndex = 3"
                     >
                         <h3>
-                            {{ __('Localization') }}
+                            {{ __('Localization QA') }}
                         </h3>
                         {{--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e4e4e4" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"
                             class="w-16 h-16 flex-shrink-0"
@@ -718,10 +718,10 @@
                     >
                         <div class="">
                             <div>
-                                {{ __('A blend of handcrafted and AI-powered translation ensures that even poems and jokes feel natural. With Translation Memory, style guides, glossaries, and cross-platform terminology, your content stays on brand and sounds native to the audience.') }}
+                                {{ __('We check more than the words. We test every string in context, checking for text overflow, broken UI, and layout issues, so your game stays fully functional in every language.') }}
                             </div>
                             <div class="mt-6 section-tags">
-                                {{ __('5 Recording studios, 40+ Successful projects, 15 Years on market, AI Hybrid Translation.') }}
+                                {{ __('TEST PLAN, BUG TRACKING AND REPORTING, COSMETIC AND FUNCTIONAL TESTING, QA REPORT.') }}
                             </div>
                             <div>&nbsp;</div>
                             <div class="hidden max-sm:flex">
@@ -752,7 +752,7 @@
     {{--<section id="call" class="mb-60 max-lg:mb-40 max-sm:mb-20">--}}
     <section id="call" class="mb-[182px] max-lg:mb-[176px] max-sm:mb-[292px]">
         <div class="section-head">{{ __('SCHEDULE A CALL') }}</div>
-        <div class="content-big">{{ __('Let’s talk about your project, goals, and how we can bring them to life.') }}</div>
+        <div class="content-big">{{ __("Tell us a bit about your project and its scope, and we'll get you a quote within one business day.") }}</div>
         <div class="flex justify-center items-center mt-12" x-data>
             <button @click="$store.contactModal.openModal()" class="white_btn">
                 {{ __('Book a Call') }}
