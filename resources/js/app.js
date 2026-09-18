@@ -47,6 +47,15 @@ Alpine.data('contactForm', () => ({
 
             if (response.ok) {
                 this.success = true;
+
+                // Send Google Analytics event
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_submit', {
+                        'event_category': 'Contact',
+                        'event_label': 'Contact Form'
+                    });
+                }
+
                 this.form = { name: '', email: '', message: '' };
                 setTimeout(() => {
                     this.success = false;

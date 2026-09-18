@@ -179,7 +179,7 @@
     <section id="news" class="mb-[198px] max-lg:mb-[164px] max-sm:mb-[122px]">
         <div class="section-head">{{ __('BLOG') }}</div>
 
-        <h2>{{ __('NEWS & INSIGHTS') }}</h2>
+        <h2 class="!mb-[124px] max-lg:!mb-[92px] max-sm:!mb-[104px]">{{ __('NEWS & INSIGHTS') }}</h2>
 
         {{--<div class="flex border-b py-5">
             <a href="{{ route('posts.index', app()->getLocale()) }}" class="btn-arrow ml-auto">{{ __('Read all posts') }}</a>
@@ -270,7 +270,7 @@
                         <circle cx="12" cy="12" r="10" fill="none" stroke="#e4e4e4"/>
                         <path d="M12 17V8M9 11l3-3 3 3" stroke="#e4e4e4" stroke-width="1"/>
                     </svg>--}}
-                    <div class="sprite-arrow sprite-arrow-62-bottom-black transition-transform duration-300" :class="isCollapsed ? 'rotate-180' : 'rotate-0'"></div>
+                    <div class="sprite-arrow sprite-arrow-62-bottom-black transition-transform duration-300" :class="isCollapsed ? 'rotate-0' : 'rotate-180'"></div>
                 </button>
             </div>
         </div>
@@ -293,7 +293,7 @@
                 </div>
                 <div class="ml-4 py-2">
                     <button>
-                        <div class="sprite-arrow sprite-arrow-44-bottom-black transition-transform duration-300" :class="showContent ? 'rotate-180' : 'rotate-0'"></div>
+                        <div class="sprite-arrow sprite-arrow-44-bottom-black transition-transform duration-300" :class="showContent ? 'rotate-0' : 'rotate-180'"></div>
                     </button>
                 </div>
             </div>
@@ -363,7 +363,7 @@
                 <div class="ml-4 py-2">
                     <button @click="toggleContent()">
                         {{--<span class="white-circle-updown" x-text="showContent ? '↑' : '↓'">&nbsp;</span>--}}
-                        <div class="sprite-arrow sprite-arrow-44-bottom-black transition-transform duration-300" :class="showContent ? 'rotate-180' : 'rotate-0'"></div>
+                        <div class="sprite-arrow sprite-arrow-44-bottom-black transition-transform duration-300" :class="showContent ? 'rotate-0' : 'rotate-180'"></div>
                     </button>
                 </div>
             </div>
@@ -414,7 +414,7 @@
         <div class="section-head">{{ __('PROJECTS') }}</div>
 
         <div class="flex justify-center text-center">
-            <h2 class="max-w-[1004px] max-lg:max-w-[670px] mb-[58px] max-lg:mb-[36px] max-sm:mb-[44px]">{{ __('GAMES WE HELPED BRING TO THE WORLD') }}</h2>
+            <h2 class="max-w-[1004px] max-lg:max-w-[670px] !mb-[58px] max-lg:!mb-[36px] max-sm:!mb-[44px]">{{ __('GAMES WE HELPED BRING TO THE WORLD') }}</h2>
         </div>
 
         @if($projectImages->count())
@@ -458,7 +458,7 @@
         <div class="section-head">{{ __('SERVICES') }}</div>
 
         <div class="flex justify-center text-center">
-            <h2 class="max-w-[1180px] mb-[90px] max-lg:mb-[113px] max-sm:mb-[28px]">{{ __('WHAT WE DO') }}</h2>
+            <h2 class="max-w-[1180px] !mb-[90px] max-lg:!mb-[113px] max-sm:!mb-[28px]">{{ __('WHAT WE DO') }}</h2>
         </div>
 
         <div
