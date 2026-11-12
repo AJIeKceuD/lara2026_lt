@@ -12,6 +12,14 @@ Alpine.store('contactModal', {
     },
     openModal() {
         this.open = true;
+
+        // Send Google Analytics event
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'book_a_call_open', {
+                'event_category': 'Contact',
+                'event_label': 'Contact Form'
+            });
+        }
     },
     closeModal() {
         this.open = false;
@@ -50,7 +58,7 @@ Alpine.data('contactForm', () => ({
 
                 // Send Google Analytics event
                 if (typeof gtag !== 'undefined') {
-                    gtag('event', 'form_submit', {
+                    gtag('event', 'book_a_call_submit', {
                         'event_category': 'Contact',
                         'event_label': 'Contact Form'
                     });
