@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FormContactUsController;
 
@@ -30,6 +31,9 @@ Route::group([
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('/posts/{slug}', [PostController::class, 'show'])->name('posts.show');
+
+    Route::get('/terms', [PageController::class, 'terms'])->name('pages.about');
+    Route::get('/privacy', [PageController::class, 'privacy'])->name('pages.privacy');
 });
 
 Route::any('/contact-us', [FormContactUsController::class, 'store'])->name('contact-us.store');

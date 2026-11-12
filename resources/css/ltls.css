@@ -42,6 +42,11 @@ h3 {
     font-family: var(--font-display);
     color: #e4e4e4;
 }
+h4 {
+    @apply text-[20px] font-bold mb-2 leading-none;
+    font-family: var(--font-display);
+    color: #e4e4e4;
+}
 
 section[id] {
     scroll-margin-top: 80px;
